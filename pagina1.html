@@ -3,11 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vibezz - Rede Social Neural</title>
+    <title>Nexus IA - O Futuro da Conexão</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
             --black: #000000;
             --white: #ffffff;
@@ -15,52 +21,115 @@
             --gray-700: #333333;
             --gray-500: #4d4d4d;
             --gray-300: #808080;
-            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            --glow: rgba(255,255,255,0.6);
+            --accent: #00ffff;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--black);
+            background: var(--black);
             color: var(--white);
-            line-height: 1.6;
             overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
         }
 
-        /* Fundo neural */
-        body::before {
-            content: '';
+        /* Fundo com partículas animadas */
+        #particles {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.02) 0%, transparent 25%),
-                        radial-gradient(circle at 70% 60%, rgba(255,255,255,0.02) 0%, transparent 25%),
-                        repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 15px);
-            pointer-events: none;
             z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
         }
 
-        /* ========== LOADING DE 20 SEGUNDOS ========== */
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            filter: blur(1px);
+            animation: float 20s infinite linear;
+            opacity: 0;
+        }
+
+        .particle::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            border-radius: inherit;
+            animation: pulseGlow 3s infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(20vw);
+                opacity: 0;
+            }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 10px var(--glow); }
+            50% { box-shadow: 0 0 30px var(--glow); }
+        }
+
+        /* Frases flutuantes */
+        .floating-phrase {
+            position: absolute;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.1);
+            white-space: nowrap;
+            pointer-events: none;
+            animation: phraseFloat 15s linear infinite;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        @keyframes phraseFloat {
+            0% {
+                transform: translateX(-20%) translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateX(120vw) translateY(-50vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Loading Screen aprimorado com quiz */
         .loading-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--black);
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(10px);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 2000;
-            transition: opacity 0.8s ease;
+            transition: opacity 1s ease;
+            padding: 2rem;
         }
 
         .loading-screen.hidden {
@@ -68,18 +137,73 @@
             pointer-events: none;
         }
 
-        .loading-spinner {
-            width: 80px;
-            height: 80px;
-            border: 3px solid var(--gray-700);
-            border-top-color: var(--white);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        .quiz-container {
+            max-width: 600px;
+            width: 100%;
+            background: rgba(26,26,26,0.8);
+            border: 1px solid var(--gray-700);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 0 50px rgba(255,255,255,0.05);
+            margin-bottom: 2rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .quiz-container h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff, #aaf0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .quiz-container p {
+            color: var(--gray-300);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .quiz-question {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
             margin-bottom: 2rem;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .quiz-option {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--gray-700);
+            border-radius: 40px;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .quiz-option:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--white);
+            transform: scale(1.02);
+        }
+
+        .quiz-option.selected {
+            background: var(--white);
+            color: var(--black);
+            border-color: var(--white);
+            font-weight: 600;
+        }
+
+        .quiz-feedback {
+            margin-top: 1rem;
+            font-size: 1rem;
+            min-height: 2rem;
+            color: var(--accent);
         }
 
         .loading-progress {
@@ -88,7 +212,7 @@
             background: var(--gray-900);
             border-radius: 4px;
             overflow: hidden;
-            margin: 2rem 0;
+            margin-top: 2rem;
         }
 
         .loading-bar {
@@ -96,45 +220,36 @@
             width: 0;
             background: var(--white);
             transition: width 0.1s linear;
+            box-shadow: 0 0 20px var(--glow);
         }
 
-        .loading-message {
-            font-size: 1.2rem;
+        .progress-text {
+            margin-top: 1rem;
             color: var(--gray-300);
-            min-height: 3rem;
-            text-align: center;
-            animation: pulseText 2s infinite;
+            font-size: 0.9rem;
         }
 
-        @keyframes pulseText {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1; }
-        }
-
-        /* ========== CONTEÚDO PRINCIPAL ========== */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
+        /* Conteúdo principal */
+        .main-content {
             position: relative;
-            z-index: 1;
+            z-index: 10;
             opacity: 0;
-            animation: fadeIn 1s ease forwards;
-            animation-delay: 20s; /* Aparece após o loading */
+            animation: fadeInMain 1s ease forwards;
+            animation-delay: 20s;
+            min-height: 100vh;
         }
 
-        @keyframes fadeIn {
+        @keyframes fadeInMain {
             to { opacity: 1; }
         }
 
-        /* Menu de navegação fixo */
         .navbar {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            padding: 1rem 2rem;
-            background: rgba(0,0,0,0.8);
+            padding: 1.5rem 2rem;
+            background: rgba(0,0,0,0.3);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--gray-700);
             z-index: 100;
@@ -143,78 +258,94 @@
             align-items: center;
         }
 
-        .navbar .logo {
-            font-size: 1.5rem;
-            font-weight: 600;
-            letter-spacing: 2px;
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-shadow: 0 0 15px rgba(255,255,255,0.5);
         }
 
-        .navbar .nav-links {
+        .nav-links {
             display: flex;
             gap: 2rem;
         }
 
-        .navbar a {
+        .nav-links a {
             color: var(--gray-300);
             text-decoration: none;
-            transition: var(--transition);
+            transition: 0.3s;
+            font-weight: 500;
         }
 
-        .navbar a:hover {
+        .nav-links a:hover {
             color: var(--white);
         }
 
-        /* Hero */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem 2rem;
+        }
+
         .hero {
             text-align: center;
             margin: 4rem 0 6rem;
         }
 
         .hero h1 {
-            font-size: 4rem;
-            font-weight: 600;
-            background: linear-gradient(135deg, #fff, #aaa);
+            font-size: 5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #aaccff, #ffffff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 1rem;
-            animation: reveal 1s ease-out;
+            animation: glowText 3s infinite;
         }
 
-        .hero .tagline {
-            font-size: 1.5rem;
+        @keyframes glowText {
+            0%, 100% { text-shadow: 0 0 20px rgba(255,255,255,0.3); }
+            50% { text-shadow: 0 0 40px rgba(170,240,255,0.8); }
+        }
+
+        .hero .sub {
+            font-size: 1.8rem;
             color: var(--gray-300);
-            animation: reveal 1s ease-out 0.2s both;
         }
 
-        @keyframes reveal {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        /* Cards com scroll reveal */
         .section-title {
-            font-size: 2rem;
-            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            margin: 4rem 0 2rem;
             text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 2px;
+            background: var(--white);
+            margin: 1rem auto;
+            box-shadow: 0 0 15px var(--glow);
         }
 
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin: 3rem 0;
         }
 
         .card {
-            background: rgba(26, 26, 26, 0.7);
+            background: rgba(20,20,20,0.7);
             backdrop-filter: blur(5px);
             border: 1px solid var(--gray-700);
-            border-radius: 16px;
+            border-radius: 24px;
             padding: 2rem;
-            transition: var(--transition);
+            transition: 0.4s;
             opacity: 0;
             transform: translateY(30px);
-            animation: slideUp 0.8s ease forwards;
+            animation: cardAppear 0.8s ease forwards;
         }
 
         .card:nth-child(1) { animation-delay: 0.2s; }
@@ -222,22 +353,26 @@
         .card:nth-child(3) { animation-delay: 0.6s; }
         .card:nth-child(4) { animation-delay: 0.8s; }
 
+        @keyframes cardAppear {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(255,255,255,0.05);
+            transform: translateY(-10px) scale(1.02);
             border-color: var(--white);
+            box-shadow: 0 20px 40px rgba(255,255,255,0.1);
         }
 
         .card h3 {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin-bottom: 1rem;
         }
 
         .card p {
             color: var(--gray-300);
+            line-height: 1.8;
         }
 
-        /* Botões com glow */
         .btn-group {
             display: flex;
             gap: 2rem;
@@ -247,232 +382,347 @@
         }
 
         .btn {
-            padding: 1rem 2.5rem;
-            border: 1px solid var(--white);
+            padding: 1rem 3rem;
+            border: 2px solid var(--white);
             background: transparent;
             color: var(--white);
-            font-size: 1.1rem;
-            font-weight: 500;
-            border-radius: 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
             cursor: pointer;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
+            transition: 0.4s;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .btn:hover {
             background: var(--white);
             color: var(--black);
-            box-shadow: 0 0 25px rgba(255,255,255,0.5);
+            box-shadow: 0 0 30px rgba(255,255,255,0.7);
         }
 
-        .btn-glow {
-            animation: glowPulse 2s infinite;
+        /* Seção de depoimentos */
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
         }
 
-        @keyframes glowPulse {
-            0%, 100% { box-shadow: 0 0 5px rgba(255,255,255,0.3); }
-            50% { box-shadow: 0 0 20px rgba(255,255,255,0.6); }
+        .testimonial {
+            background: rgba(255,255,255,0.02);
+            border-left: 4px solid var(--white);
+            padding: 1.5rem;
+            border-radius: 12px;
+            font-style: italic;
         }
 
-        .btn.coming-soon {
-            opacity: 0.7;
-            cursor: not-allowed;
-            position: relative;
+        .testimonial .author {
+            margin-top: 1rem;
+            color: var(--gray-300);
+            font-style: normal;
+            font-weight: 500;
         }
 
-        .btn.coming-soon::after {
-            content: 'Em breve';
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background: var(--white);
-            color: var(--black);
-            font-size: 0.7rem;
-            padding: 0.2rem 0.5rem;
-            border-radius: 20px;
-            font-weight: 600;
-        }
-
-        /* Call to action final */
-        .cta-section {
-            text-align: center;
-            padding: 4rem 0;
-            border-top: 1px solid var(--gray-700);
-            border-bottom: 1px solid var(--gray-700);
+        .quiz-fixed {
+            background: rgba(0,0,0,0.3);
+            border-radius: 24px;
+            padding: 2rem;
             margin: 4rem 0;
+            border: 1px dashed var(--gray-500);
         }
 
-        .cta-btn {
-            font-size: 1.5rem;
-            padding: 1.2rem 3rem;
-            background: var(--white);
-            color: var(--black);
-            border: none;
-            animation: ctaPulse 2s infinite;
+        .quiz-fixed h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
         }
 
-        .cta-btn:hover {
-            background: transparent;
-            color: var(--white);
-            box-shadow: 0 0 30px rgba(255,255,255,0.8);
+        .quiz-fixed .btn {
+            margin-top: 1rem;
         }
 
-        @keyframes ctaPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        footer {
+            text-align: center;
+            padding: 3rem;
+            color: var(--gray-500);
+            border-top: 1px solid var(--gray-700);
         }
 
-        /* Responsividade */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
+            .hero h1 { font-size: 3rem; }
             .navbar { padding: 1rem; }
-            .nav-links { gap: 1rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Loading de 20 segundos -->
+    <!-- Partículas e frases flutuantes -->
+    <div id="particles"></div>
+
+    <!-- Loading Screen com Quiz -->
     <div class="loading-screen" id="loadingScreen">
-        <div class="loading-spinner"></div>
-        <div class="loading-message" id="loadingMessage">Preparando sua experiência...</div>
+        <div class="quiz-container" id="quizContainer">
+            <h2>Bem-vindo ao futuro</h2>
+            <p>Responda rapidamente e descubra por que o Nexus IA é para você</p>
+            <div id="quizArea">
+                <!-- Perguntas serão inseridas via JS -->
+            </div>
+            <div class="quiz-feedback" id="quizFeedback"></div>
+        </div>
         <div class="loading-progress">
             <div class="loading-bar" id="loadingBar"></div>
         </div>
+        <div class="progress-text" id="progressText">Carregando 0%</div>
     </div>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo">NEAJ NEXUS LABS</div>
-        <div class="nav-links">
-            <a href="index.html">Início</a>
-            <a href="pagina1.html">Vibezz</a>
-            <a href="detalhes.html">Nexus IA</a>
-        </div>
-    </nav>
-
-    <!-- Conteúdo principal -->
-    <div class="container">
-        <section class="hero">
-            <h1>Vibezz</h1>
-            <p class="tagline">A Rede Social Neural do Futuro</p>
-        </section>
-
-        <section>
-            <h2 class="section-title">Conectando artistas a oportunidades reais</h2>
-            <div class="cards-grid">
-                <div class="card">
-                    <h3>🌐 Rede Social Neural</h3>
-                    <p>Uma plataforma que aprende com seu estilo e conecta você às pessoas certas.</p>
-                </div>
-                <div class="card">
-                    <h3>🎨 Algoritmo Inteligente</h3>
-                    <p>Descobre talentos não reconhecidos e os coloca em evidência para empresas e marcas.</p>
-                </div>
-                <div class="card">
-                    <h3>💰 Monetização para Criadores</h3>
-                    <p>Ferramentas exclusivas para você transformar sua paixão em renda.</p>
-                </div>
-                <div class="card">
-                    <h3>📈 Análise de Performance com IA</h3>
-                    <p>Métricas detalhadas e insights para impulsionar seu crescimento.</p>
-                </div>
+    <!-- Conteúdo Principal -->
+    <div class="main-content">
+        <nav class="navbar">
+            <div class="logo">NEXUS IA</div>
+            <div class="nav-links">
+                <a href="#">Início</a>
+                <a href="#">Vibezz</a>
+                <a href="#">Nexus IA</a>
+                <a href="#">Contato</a>
             </div>
-        </section>
+        </nav>
 
-        <section>
-            <h2 class="section-title">Público-Alvo</h2>
-            <div class="cards-grid">
-                <div class="card">
-                    <h3>🎤 Artistas Emergentes</h3>
-                    <p>Mostre seu trabalho para quem realmente importa.</p>
+        <div class="container">
+            <section class="hero">
+                <h1>Nexus IA</h1>
+                <p class="sub">A inteligência que conecta talentos ao mundo</p>
+            </section>
+
+            <section>
+                <h2 class="section-title">Por que Nexus IA?</h2>
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>🧠 Aprendizado Profundo</h3>
+                        <p>Nossa IA estuda seu comportamento e oferece conexões genuínas, não apenas algoritmos superficiais.</p>
+                    </div>
+                    <div class="card">
+                        <h3>🚀 Descoberta de Talentos</h3>
+                        <p>Artistas, criadores e profissionais são identificados e apresentados a oportunidades reais.</p>
+                    </div>
+                    <div class="card">
+                        <h3>🔒 Privacidade Primeiro</h3>
+                        <p>Seus dados pertencem a você. Usamos criptografia de ponta a ponta e anonimização.</p>
+                    </div>
+                    <div class="card">
+                        <h3>🌍 Rede Global</h3>
+                        <p>Conecte-se com pessoas e marcas de todo o mundo que compartilham seus interesses.</p>
+                    </div>
                 </div>
-                <div class="card">
-                    <h3>💼 Profissionais Criativos</h3>
-                    <p>Designers, músicos, escritores e mais.</p>
+            </section>
+
+            <section>
+                <h2 class="section-title">Como a IA Transforma sua Experiência</h2>
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>📊 Análise Preditiva</h3>
+                        <p>Antecipamos tendências e mostramos seu potencial de crescimento antes mesmo de você perceber.</p>
+                    </div>
+                    <div class="card">
+                        <h3>🎯 Match Inteligente</h3>
+                        <p>Nossa IA encontra colaboradores, mentores e fãs ideais para o seu perfil.</p>
+                    </div>
+                    <div class="card">
+                        <h3>💡 Insights Criativos</h3>
+                        <p>Receba sugestões de conteúdo e parcerias baseadas em dados reais do mercado.</p>
+                    </div>
+                    <div class="card">
+                        <h3>⚡ Monetização Automática</h3>
+                        <p>Identificamos oportunidades de patrocínio e venda de serviços automaticamente.</p>
+                    </div>
                 </div>
-                <div class="card">
-                    <h3>🏢 Empresas e Marcas</h3>
-                    <p>Encontre os talentos perfeitos para seus projetos.</p>
+            </section>
+
+            <section class="testimonials">
+                <div class="testimonial">
+                    <p>"O Nexus IA me conectou com um produtor musical dos EUA. Minha carreira mudou completamente!"</p>
+                    <p class="author">— Ana Clara, cantora</p>
                 </div>
-                <div class="card">
-                    <h3>📢 Agências</h3>
-                    <p>Descubra a próxima grande estrela.</p>
+                <div class="testimonial">
+                    <p>"Como designer, recebi propostas de empresas que nunca imaginaria. A IA realmente entende meu estilo."</p>
+                    <p class="author">— Marcos Silva, designer</p>
                 </div>
+                <div class="testimonial">
+                    <p>"Plataforma revolucionária. Finalmente uma rede que valoriza o talento real."</p>
+                    <p class="author">— Juliana Mendes, fotógrafa</p>
+                </div>
+            </section>
+
+            <!-- Quiz fixo na página -->
+            <div class="quiz-fixed">
+                <h3>Descubra seu potencial com Nexus IA</h3>
+                <p>Responda nosso quiz rápido e veja como podemos impulsionar sua carreira.</p>
+                <a href="#" class="btn" onclick="alert('Quiz interativo em breve!')">Começar Quiz</a>
             </div>
-        </section>
 
-        <!-- Botões de ação -->
-        <div class="btn-group">
-            <a href="#" class="btn btn-glow">
-                <span>⭐</span> Saiba Mais Sobre Como Ficar Famoso
-            </a>
-            <a href="#" class="btn coming-soon">
-                <span>🔮</span> Como Usar
-            </a>
+            <div class="btn-group">
+                <a href="#" class="btn">Quero fazer parte</a>
+                <a href="#" class="btn">Saiba mais</a>
+            </div>
+
+            <footer>
+                © 2026 Nexus IA - Todos os direitos reservados.
+            </footer>
         </div>
-
-        <!-- CTA final -->
-        <section class="cta-section">
-            <h2 style="margin-bottom: 2rem;">Pronto para a revolução?</h2>
-            <a href="detalhes.html" class="btn cta-btn">
-                Descubra a Nova Revolução <span style="margin-left: 0.5rem;">🚀</span>
-            </a>
-        </section>
     </div>
 
     <script>
-        // ========== LOADING DE 20 SEGUNDOS ==========
+        // ========== PARTÍCULAS E FRASES FLUTUANTES ==========
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.width = (Math.random() * 10 + 2) + 'px';
+                particle.style.height = particle.style.width;
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        function createFloatingPhrases() {
+            const phrases = [
+                'Nexus IA', 'Futuro', 'Conexão', 'Talento', 'Inovação',
+                'IA Ética', 'Rede Neural', 'Oportunidade', 'Criatividade',
+                'Revolução', 'Vibezz', 'Artistas', 'Música', 'Design'
+            ];
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 20; i++) {
+                const phrase = document.createElement('div');
+                phrase.className = 'floating-phrase';
+                phrase.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+                phrase.style.top = Math.random() * 100 + '%';
+                phrase.style.left = Math.random() * 100 + '%';
+                phrase.style.fontSize = (Math.random() * 1.5 + 0.8) + 'rem';
+                phrase.style.animationDuration = (Math.random() * 15 + 10) + 's';
+                phrase.style.animationDelay = Math.random() * 10 + 's';
+                container.appendChild(phrase);
+            }
+        }
+
+        createParticles();
+        createFloatingPhrases();
+
+        // ========== QUIZ DURANTE O LOADING ==========
         const loadingScreen = document.getElementById('loadingScreen');
         const loadingBar = document.getElementById('loadingBar');
-        const loadingMessage = document.getElementById('loadingMessage');
+        const progressText = document.getElementById('progressText');
+        const quizArea = document.getElementById('quizArea');
+        const quizFeedback = document.getElementById('quizFeedback');
 
-        const messages = [
-            "Preparando sua experiência...",
-            "Conectando com o futuro...",
-            "Carregando inovação...",
-            "Sincronizando neurônios...",
-            "Quase lá..."
+        const questions = [
+            {
+                question: "Qual área melhor descreve seu talento?",
+                options: ["Música", "Artes Visuais", "Escrita", "Tecnologia", "Outro"],
+                correct: null // sem resposta certa, apenas informativo
+            },
+            {
+                question: "Você já tentou monetizar seu trabalho online?",
+                options: ["Sim, com sucesso", "Sim, mas sem resultados", "Nunca tentei", "Estou começando"],
+                correct: null
+            },
+            {
+                question: "O que você mais busca em uma rede social?",
+                options: ["Visibilidade", "Networking profissional", "Comunidade", "Monetização", "Aprendizado"],
+                correct: null
+            }
         ];
 
-        let startTime = Date.now();
-        const duration = 20000; // 20 segundos
+        let currentQuestion = 0;
+        let selectedOption = null;
+        let answers = [];
 
-        function updateLoading() {
-            const elapsed = Date.now() - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            loadingBar.style.width = (progress * 100) + '%';
+        function renderQuestion() {
+            const q = questions[currentQuestion];
+            let html = `<div class="quiz-question">${q.question}</div>`;
+            html += '<div class="quiz-options">';
+            q.options.forEach((opt, idx) => {
+                html += `<div class="quiz-option" data-opt="${idx}">${opt}</div>`;
+            });
+            html += '</div>';
+            quizArea.innerHTML = html;
 
-            // Trocar mensagem em determinados intervalos
-            if (progress < 0.2) {
-                loadingMessage.textContent = messages[0];
-            } else if (progress < 0.4) {
-                loadingMessage.textContent = messages[1];
-            } else if (progress < 0.6) {
-                loadingMessage.textContent = messages[2];
-            } else if (progress < 0.8) {
-                loadingMessage.textContent = messages[3];
+            // Adicionar eventos
+            document.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.addEventListener('click', function() {
+                    document.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedOption = this.getAttribute('data-opt');
+                    answers[currentQuestion] = {
+                        question: q.question,
+                        answer: q.options[selectedOption]
+                    };
+                });
+            });
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                renderQuestion();
             } else {
-                loadingMessage.textContent = messages[4];
+                // Fim do quiz, mensagem de agradecimento
+                quizArea.innerHTML = `<div style="text-align:center; padding:2rem;">
+                    <h3>Obrigado por participar!</h3>
+                    <p>Em breve você fará parte da revolução Nexus IA.</p>
+                </div>`;
+                quizFeedback.innerHTML = ''; // limpa feedback
             }
+        }
 
-            if (progress < 1) {
-                requestAnimationFrame(updateLoading);
-            } else {
-                // Esconder loading após 20 segundos
+        // Avança automaticamente a cada 5 segundos (simulando ritmo)
+        setInterval(() => {
+            nextQuestion();
+        }, 5000);
+
+        renderQuestion();
+
+        // ========== SIMULAÇÃO DE LOADING DE 20 SEGUNDOS ==========
+        let progress = 0;
+        const totalTime = 20000; // 20s
+        const interval = 100; // atualiza a cada 100ms
+        const step = (interval / totalTime) * 100;
+
+        const loadingInterval = setInterval(() => {
+            progress += step;
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(loadingInterval);
                 setTimeout(() => {
                     loadingScreen.classList.add('hidden');
                 }, 500);
             }
-        }
+            loadingBar.style.width = progress + '%';
+            progressText.textContent = `Carregando ${Math.round(progress)}%`;
+        }, interval);
 
-        requestAnimationFrame(updateLoading);
-
-        // Garantir que o loading suma após 20 segundos mesmo se algo der errado
+        // Garantir que suma após 21s
         setTimeout(() => {
             loadingScreen.classList.add('hidden');
         }, 21000);
