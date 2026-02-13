@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEAJ Nexus Labs - Cadastro</title>
-    <meta name="description" content="Junte-se ao futuro da IA com a Nexus e a rede social neural Vibezz.">
+    <title>NEAJ Nexus Labs - Entrada no Futuro</title>
+    <meta name="description" content="Junte-se à revolução da IA com a Nexus e a rede neural Vibezz.">
     <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,12 +12,14 @@
     <style>
         /* ========== VARIÁVEIS ========== */
         :root {
-            --black: #000000;
+            --black: #0a0a0a;
             --white: #ffffff;
-            --gray-900: #1a1a1a;
+            --gray-900: #141414;
+            --gray-800: #1f1f1f;
             --gray-700: #333333;
             --gray-500: #4d4d4d;
-            --gray-300: #808080;
+            --gray-300: #a0a0a0;
+            --glow: rgba(255, 255, 255, 0.1);
             --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
@@ -38,7 +40,7 @@
             min-height: 100vh;
         }
 
-        /* Fundo com partículas simuladas via gradiente animado */
+        /* Fundo com partículas e gradiente animado */
         body::before {
             content: '';
             position: fixed;
@@ -46,9 +48,29 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.03) 0%, transparent 20%),
-                        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.03) 0%, transparent 20%),
-                        repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 10px);
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.05) 0%, transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.05) 0%, transparent 30%),
+                linear-gradient(125deg, #000000 0%, #1a1a1a 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Partículas extras (opcional) */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 10px 30px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 20px 80px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 130px 230px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 760px 540px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 920px 320px, #fff, rgba(0,0,0,0));
+            background-repeat: no-repeat;
+            opacity: 0.3;
             pointer-events: none;
             z-index: 0;
         }
@@ -66,45 +88,56 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            animation: fadeOut 1s ease-in-out 5s forwards;
+            animation: fadeOut 1s ease-in-out 5.5s forwards;
             pointer-events: none;
+            padding: 2rem;
         }
 
         .splash-logo {
-            font-size: 3rem;
+            font-size: clamp(2rem, 8vw, 4rem);
             font-weight: 700;
-            letter-spacing: 4px;
+            letter-spacing: 6px;
             animation: scaleIn 1.5s ease-out;
             margin-bottom: 2rem;
-            text-shadow: 0 0 15px rgba(255,255,255,0.7);
+            text-shadow: 0 0 20px rgba(255,255,255,0.7);
+            background: linear-gradient(135deg, #fff, #ccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .typing-container {
+            max-width: 90%;
+            width: 800px;
+            margin-bottom: 2rem;
         }
 
         .typing-text {
-            font-size: 1.5rem;
-            font-weight: 600;
-            border-right: 2px solid var(--white);
+            font-size: clamp(1rem, 4vw, 1.8rem);
+            font-weight: 500;
+            border-right: 3px solid var(--white);
             white-space: nowrap;
             overflow: hidden;
             width: 0;
+            margin: 0 auto;
             animation: typing 4s steps(55, end) forwards, blink 0.75s step-end infinite;
-            margin-bottom: 2rem;
-            text-shadow: 0 0 8px rgba(255,255,255,0.6);
-            max-width: 90%;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+            color: var(--white);
         }
 
         .progress-bar {
-            width: 200px;
-            height: 2px;
+            width: min(300px, 80%);
+            height: 3px;
             background: var(--gray-700);
-            border-radius: 2px;
+            border-radius: 3px;
             overflow: hidden;
+            box-shadow: 0 0 10px rgba(255,255,255,0.2);
         }
 
         .progress-fill {
             height: 100%;
             width: 0;
             background: var(--white);
-            animation: progressLoad 4.5s ease-in-out forwards;
+            animation: progressLoad 5s ease-in-out forwards;
         }
 
         @keyframes fadeOut {
@@ -122,8 +155,7 @@
         }
 
         @keyframes blink {
-            from, to { border-color: transparent; }
-            50% { border-color: var(--white); }
+            50% { border-color: transparent; }
         }
 
         @keyframes progressLoad {
@@ -137,9 +169,9 @@
             margin: 0 auto;
             padding: 2rem;
             position: relative;
-            z-index: 1;
+            z-index: 2;
             opacity: 0;
-            animation: fadeInContent 1s ease-in 5.5s forwards;
+            animation: fadeInContent 1s ease-in 6s forwards;
         }
 
         @keyframes fadeInContent {
@@ -148,11 +180,11 @@
 
         .hero {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: clamp(2.2rem, 6vw, 3.5rem);
             font-weight: 600;
             margin-bottom: 1rem;
             background: linear-gradient(135deg, #fff, #aaa);
@@ -176,22 +208,26 @@
 
         /* ========== BANNER DE USUÁRIO EXISTENTE ========== */
         .user-banner {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--gray-700);
-            border-radius: 8px;
-            padding: 1rem 1.5rem;
-            margin-bottom: 2rem;
+            border-radius: 60px;
+            padding: 0.8rem 1.5rem;
+            margin-bottom: 2.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 1rem;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
         }
 
         .user-banner p {
             color: var(--gray-300);
-            font-size: 0.95rem;
+            font-size: 1rem;
         }
 
         .user-banner strong {
@@ -203,8 +239,8 @@
             background: transparent;
             border: 1px solid var(--white);
             color: var(--white);
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
             cursor: pointer;
             font-size: 0.9rem;
             font-weight: 500;
@@ -216,22 +252,23 @@
         .btn-small:hover {
             background: var(--white);
             color: var(--black);
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
         }
 
         /* ========== FORMULÁRIO ========== */
         .form-container {
-            max-width: 500px;
+            max-width: 520px;
             margin: 0 auto;
-            background: rgba(26, 26, 26, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 2.5rem;
-            border: 1px solid var(--gray-700);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(15px);
+            border-radius: 24px;
+            padding: 2.8rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.05) inset;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
             position: relative;
         }
 
@@ -240,30 +277,33 @@
             margin-bottom: 0.5rem;
             font-weight: 500;
             color: var(--gray-300);
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
         }
 
         .form-group input {
             width: 100%;
-            padding: 0.8rem 1rem;
+            padding: 1rem 1.2rem;
             background: var(--gray-900);
             border: 1px solid var(--gray-700);
-            border-radius: 8px;
+            border-radius: 14px;
             color: var(--white);
             font-size: 1rem;
             transition: var(--transition);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         .form-group input:focus {
             outline: none;
             border-color: var(--white);
-            box-shadow: 0 0 0 2px rgba(255,255,255,0.1);
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.1), 0 2px 5px rgba(0,0,0,0.2);
         }
 
         .form-group .validation-icon {
             position: absolute;
-            right: 1rem;
-            top: 2.5rem;
-            font-size: 1.2rem;
+            right: 1.2rem;
+            top: 3.2rem;
+            font-size: 1.3rem;
             opacity: 0;
             transition: var(--transition);
         }
@@ -271,63 +311,81 @@
         .form-group.valid .validation-icon {
             opacity: 1;
             color: #4caf50;
+            filter: drop-shadow(0 0 5px #4caf50);
         }
 
         .form-group.invalid .validation-icon {
             opacity: 1;
             color: #f44336;
+            filter: drop-shadow(0 0 5px #f44336);
         }
 
         .error-message {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #f44336;
             margin-top: 0.3rem;
             min-height: 1.2rem;
+            padding-left: 0.5rem;
         }
 
         .checkbox-group {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            margin: 1.5rem 0;
+            gap: 0.8rem;
+            margin: 2rem 0 1.8rem;
+            background: rgba(255,255,255,0.02);
+            padding: 0.8rem 1.2rem;
+            border-radius: 40px;
+            border: 1px solid var(--gray-700);
         }
 
         .checkbox-group input {
-            width: auto;
+            width: 18px;
+            height: 18px;
             accent-color: var(--white);
+            cursor: pointer;
         }
 
         .checkbox-group label {
             margin: 0;
             color: var(--gray-300);
+            font-size: 0.95rem;
+            cursor: pointer;
         }
 
         .checkbox-group a {
             color: var(--white);
             text-decoration: none;
             border-bottom: 1px dotted var(--white);
+            transition: var(--transition);
+        }
+
+        .checkbox-group a:hover {
+            border-bottom: 1px solid var(--white);
         }
 
         .btn {
             display: inline-block;
             width: 100%;
-            padding: 1rem;
+            padding: 1.1rem;
             background: transparent;
             border: 1px solid var(--white);
             color: var(--white);
             font-size: 1rem;
             font-weight: 600;
-            border-radius: 8px;
+            border-radius: 40px;
             cursor: pointer;
             transition: var(--transition);
             position: relative;
             overflow: hidden;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
         .btn:hover {
             background: var(--white);
             color: var(--black);
-            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+            box-shadow: 0 0 30px rgba(255,255,255,0.4);
         }
 
         .btn:active {
@@ -342,8 +400,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(5px);
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(10px);
             z-index: 2000;
             justify-content: center;
             align-items: center;
@@ -355,45 +413,54 @@
 
         .modal-content {
             background: var(--gray-900);
-            max-width: 500px;
+            max-width: 600px;
             width: 90%;
-            padding: 2rem;
-            border-radius: 16px;
-            border: 1px solid var(--gray-700);
+            padding: 2.5rem;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.1);
             max-height: 80vh;
             overflow-y: auto;
             animation: modalIn 0.3s ease-out;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.7);
         }
 
         @keyframes modalIn {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+            from { transform: scale(0.9) translateY(20px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
         }
 
         .modal-content h2 {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             color: var(--white);
+            font-weight: 600;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #fff, #aaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .modal-content p {
             color: var(--gray-300);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             line-height: 1.8;
+            font-size: 1rem;
         }
 
         .close-modal {
-            background: none;
+            background: transparent;
             border: 1px solid var(--gray-700);
             color: var(--white);
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
+            padding: 0.7rem 2rem;
+            border-radius: 30px;
             cursor: pointer;
             transition: var(--transition);
+            font-weight: 500;
         }
 
         .close-modal:hover {
             background: var(--white);
             color: var(--black);
+            border-color: var(--white);
         }
 
         /* ========== ANIMAÇÃO DE SUCESSO ========== */
@@ -409,6 +476,7 @@
             align-items: center;
             z-index: 3000;
             flex-direction: column;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
         }
 
         .success-overlay.active {
@@ -416,16 +484,17 @@
         }
 
         .checkmark {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             border: 2px solid var(--white);
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 3rem;
+            font-size: 4rem;
             margin-bottom: 2rem;
             animation: checkmarkPop 0.5s ease-out;
+            box-shadow: 0 0 40px rgba(255,255,255,0.3);
         }
 
         @keyframes checkmarkPop {
@@ -434,25 +503,71 @@
             100% { transform: scale(1); }
         }
 
+        .success-overlay h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .success-overlay p {
+            color: var(--gray-300);
+            font-size: 1.1rem;
+        }
+
+        /* ========== SUGESTÃO DE LOGIN ========== */
+        #loginSuggestion {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.02);
+            border-radius: 40px;
+            border: 1px dashed var(--gray-700);
+        }
+
+        #loginSuggestion p {
+            color: var(--gray-300);
+            font-size: 0.95rem;
+        }
+
+        #loginSuggestion a {
+            color: var(--white);
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 1px solid var(--white);
+        }
+
+        #loginSuggestion a:hover {
+            border-bottom: 2px solid var(--white);
+        }
+
         /* ========== RESPONSIVIDADE ========== */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
+        @media (max-width: 600px) {
             .container { padding: 1rem; }
-            .form-container { padding: 1.5rem; }
-            .typing-text { font-size: 1.2rem; }
-            .user-banner { flex-direction: column; text-align: center; }
+            .form-container { padding: 1.8rem; }
+            .checkbox-group { flex-wrap: wrap; }
+            .typing-text { font-size: 1rem; white-space: normal; animation: none; border-right: none; width: 100%; }
+            /* Desabilita animação de digitação em mobile para evitar problemas */
+            .splash-screen .typing-text {
+                animation: none;
+                border-right: none;
+                width: 100%;
+                white-space: normal;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Splash Screen (loading inicial) -->
+    <div class="particles"></div>
+    <!-- Splash Screen -->
     <div class="splash-screen">
         <div class="splash-logo">NEAJ NEXUS LABS</div>
-        <div class="typing-text">Inicializando Nexus Core... Conectando à rede neural Vibezz...</div>
+        <div class="typing-container">
+            <div class="typing-text">Inicializando Nexus Core... Conectando à rede neural Vibezz... Carregando interface neural...</div>
+        </div>
         <div class="progress-bar">
             <div class="progress-fill"></div>
         </div>
-        <div class="particles"></div>
     </div>
 
     <!-- Conteúdo principal -->
@@ -462,10 +577,9 @@
             <p>Crie sua conta e descubra a inteligência artificial que pensa como você.</p>
         </div>
 
-        <!-- Banner para usuário já cadastrado (será exibido via JS) -->
         <div id="userBanner" class="user-banner" style="display: none;">
             <p>Bem-vindo de volta, <strong id="userEmailDisplay"></strong>!</p>
-            <a href="pagina1.html" class="btn-small">Ir para a página principal</a>
+            <a href="pagina1.html" class="btn-small">Acessar Nexus</a>
         </div>
 
         <div class="form-container">
@@ -503,18 +617,17 @@
                 <button type="submit" class="btn" id="submitBtn">Criar Conta</button>
             </form>
 
-            <!-- Link para login caso e-mail já exista -->
-            <div id="loginSuggestion" style="text-align: center; margin-top: 1.5rem; display: none;">
-                <p style="color: var(--gray-300);">Este e-mail já possui cadastro. <a href="pagina1.html" style="color: var(--white);">Clique aqui para entrar</a>.</p>
+            <div id="loginSuggestion" style="display: none;">
+                <p>Este e-mail já está cadastrado. <a href="pagina1.html">Clique aqui para entrar</a>.</p>
             </div>
         </div>
     </div>
 
-    <!-- Modal de Termos -->
+    <!-- Modais -->
     <div class="modal" id="termsModal">
         <div class="modal-content">
             <h2>Termos de Uso</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>Ao utilizar a plataforma Nexus Labs e a rede social neural Vibezz, você concorda em compartilhar seus padrões neurais para aprimorar a inteligência artificial coletiva. Seus dados serão utilizados para treinar modelos de IA que beneficiarão toda a comunidade. A Nexus garante a proteção e anonimização dos dados conforme a LGPD. Você pode solicitar a exclusão a qualquer momento.</p>
             <button class="close-modal">Fechar</button>
         </div>
     </div>
@@ -522,213 +635,202 @@
     <div class="modal" id="privacyModal">
         <div class="modal-content">
             <h2>Política de Privacidade</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>A Nexus Labs coleta apenas informações necessárias para o funcionamento da rede neural Vibezz. Seus dados biométricos e comportamentais são criptografados e armazenados em servidores descentralizados. Nós não compartilhamos suas informações com terceiros sem seu consentimento explícito. Para mais detalhes, consulte nosso centro de privacidade.</p>
             <button class="close-modal">Fechar</button>
         </div>
     </div>
 
-    <!-- Overlay de sucesso -->
     <div class="success-overlay" id="successOverlay">
         <div class="checkmark">✓</div>
         <h2>Conta criada com sucesso!</h2>
-        <p>Redirecionando para a próxima etapa...</p>
+        <p>Redirecionando para a Nexus...</p>
     </div>
 
     <script>
-        // ========== VALIDAÇÃO DE FORMULÁRIO EM TEMPO REAL ==========
-        const nameInput = document.getElementById('name');
-        const emailInput = document.getElementById('email');
-        const passwordInput = document.getElementById('password');
-        const confirmInput = document.getElementById('confirm');
-        const termsCheck = document.getElementById('terms');
-        const form = document.getElementById('registerForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const userBanner = document.getElementById('userBanner');
-        const userEmailDisplay = document.getElementById('userEmailDisplay');
-        const loginSuggestion = document.getElementById('loginSuggestion');
+        (function() {
+            // Validações
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const confirmInput = document.getElementById('confirm');
+            const termsCheck = document.getElementById('terms');
+            const form = document.getElementById('registerForm');
+            const userBanner = document.getElementById('userBanner');
+            const userEmailDisplay = document.getElementById('userEmailDisplay');
+            const loginSuggestion = document.getElementById('loginSuggestion');
 
-        const groups = {
-            name: document.getElementById('group-name'),
-            email: document.getElementById('group-email'),
-            password: document.getElementById('group-password'),
-            confirm: document.getElementById('group-confirm')
-        };
+            const groups = {
+                name: document.getElementById('group-name'),
+                email: document.getElementById('group-email'),
+                password: document.getElementById('group-password'),
+                confirm: document.getElementById('group-confirm')
+            };
 
-        function validateName() {
-            const value = nameInput.value.trim();
-            const isValid = value.length >= 3;
-            setFieldStatus('name', isValid, isValid ? '' : 'Nome deve ter pelo menos 3 caracteres');
-            return isValid;
-        }
-
-        function validateEmail() {
-            const value = emailInput.value.trim();
-            const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-            setFieldStatus('email', isValid, isValid ? '' : 'E-mail inválido');
-            return isValid;
-        }
-
-        function validatePassword() {
-            const value = passwordInput.value;
-            const isValid = value.length >= 6;
-            setFieldStatus('password', isValid, isValid ? '' : 'Senha deve ter no mínimo 6 caracteres');
-            if (confirmInput.value) validateConfirm();
-            return isValid;
-        }
-
-        function validateConfirm() {
-            const isValid = confirmInput.value === passwordInput.value && passwordInput.value.length >= 6;
-            setFieldStatus('confirm', isValid, isValid ? '' : 'As senhas não coincidem');
-            return isValid;
-        }
-
-        function setFieldStatus(field, isValid, errorMsg) {
-            const group = groups[field];
-            const icon = group.querySelector('.validation-icon');
-            const error = group.querySelector('.error-message');
-
-            if (isValid) {
-                group.classList.add('valid');
-                group.classList.remove('invalid');
-                icon.textContent = '✓';
-                error.textContent = '';
-            } else {
-                group.classList.add('invalid');
-                group.classList.remove('valid');
-                icon.textContent = '✗';
-                error.textContent = errorMsg;
+            function validateName() {
+                const value = nameInput.value.trim();
+                const isValid = value.length >= 3;
+                setFieldStatus('name', isValid, isValid ? '' : 'Nome deve ter pelo menos 3 caracteres');
+                return isValid;
             }
-        }
 
-        nameInput.addEventListener('input', validateName);
-        emailInput.addEventListener('input', validateEmail);
-        passwordInput.addEventListener('input', validatePassword);
-        confirmInput.addEventListener('input', validateConfirm);
+            function validateEmail() {
+                const value = emailInput.value.trim();
+                const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+                setFieldStatus('email', isValid, isValid ? '' : 'E-mail inválido');
+                return isValid;
+            }
 
-        // ========== MODAIS ==========
-        const termsModal = document.getElementById('termsModal');
-        const privacyModal = document.getElementById('privacyModal');
-        const showTerms = document.getElementById('showTerms');
-        const showPrivacy = document.getElementById('showPrivacy');
-        const closeButtons = document.querySelectorAll('.close-modal');
+            function validatePassword() {
+                const value = passwordInput.value;
+                const isValid = value.length >= 6;
+                setFieldStatus('password', isValid, isValid ? '' : 'Senha deve ter no mínimo 6 caracteres');
+                if (confirmInput.value) validateConfirm();
+                return isValid;
+            }
 
-        showTerms.addEventListener('click', (e) => {
-            e.preventDefault();
-            termsModal.classList.add('active');
-        });
+            function validateConfirm() {
+                const isValid = confirmInput.value === passwordInput.value && passwordInput.value.length >= 6;
+                setFieldStatus('confirm', isValid, isValid ? '' : 'As senhas não coincidem');
+                return isValid;
+            }
 
-        showPrivacy.addEventListener('click', (e) => {
-            e.preventDefault();
-            privacyModal.classList.add('active');
-        });
+            function setFieldStatus(field, isValid, errorMsg) {
+                const group = groups[field];
+                if (!group) return;
+                const icon = group.querySelector('.validation-icon');
+                const error = group.querySelector('.error-message');
 
-        closeButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                termsModal.classList.remove('active');
-                privacyModal.classList.remove('active');
+                if (isValid) {
+                    group.classList.add('valid');
+                    group.classList.remove('invalid');
+                    icon.textContent = '✓';
+                    error.textContent = '';
+                } else {
+                    group.classList.add('invalid');
+                    group.classList.remove('valid');
+                    icon.textContent = '✗';
+                    error.textContent = errorMsg;
+                }
+            }
+
+            nameInput.addEventListener('input', validateName);
+            emailInput.addEventListener('input', validateEmail);
+            passwordInput.addEventListener('input', validatePassword);
+            confirmInput.addEventListener('input', validateConfirm);
+
+            // Modais
+            const termsModal = document.getElementById('termsModal');
+            const privacyModal = document.getElementById('privacyModal');
+            const showTerms = document.getElementById('showTerms');
+            const showPrivacy = document.getElementById('showPrivacy');
+            const closeButtons = document.querySelectorAll('.close-modal');
+
+            showTerms.addEventListener('click', (e) => {
+                e.preventDefault();
+                termsModal.classList.add('active');
             });
-        });
 
-        window.addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal')) {
-                e.target.classList.remove('active');
-            }
-        });
+            showPrivacy.addEventListener('click', (e) => {
+                e.preventDefault();
+                privacyModal.classList.add('active');
+            });
 
-        // ========== PERSISTÊNCIA DE CONTA (LOCALSTORAGE) ==========
-        const STORAGE_USERS = 'nexusUsers';
-        const STORAGE_CURRENT = 'nexusCurrentUser';
+            closeButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    termsModal.classList.remove('active');
+                    privacyModal.classList.remove('active');
+                });
+            });
 
-        // Carregar usuários do localStorage
-        function getUsers() {
-            const users = localStorage.getItem(STORAGE_USERS);
-            return users ? JSON.parse(users) : [];
-        }
+            window.addEventListener('click', (e) => {
+                if (e.target.classList.contains('modal')) {
+                    e.target.classList.remove('active');
+                }
+            });
 
-        function getCurrentUser() {
-            const user = localStorage.getItem(STORAGE_CURRENT);
-            return user ? JSON.parse(user) : null;
-        }
+            // LocalStorage
+            const STORAGE_USERS = 'nexusUsers';
+            const STORAGE_CURRENT = 'nexusCurrentUser';
 
-        function setCurrentUser(user) {
-            localStorage.setItem(STORAGE_CURRENT, JSON.stringify(user));
-        }
-
-        function addUser(user) {
-            const users = getUsers();
-            users.push(user);
-            localStorage.setItem(STORAGE_USERS, JSON.stringify(users));
-        }
-
-        function findUserByEmail(email) {
-            const users = getUsers();
-            return users.find(u => u.email === email);
-        }
-
-        // Verificar se já existe um usuário logado ao carregar a página
-        function checkLoggedUser() {
-            const currentUser = getCurrentUser();
-            if (currentUser) {
-                // Exibe banner com o e-mail do usuário
-                userEmailDisplay.textContent = currentUser.email;
-                userBanner.style.display = 'flex';
-                // Opcional: desabilitar o formulário? Não, mas podemos deixar visível.
-            }
-        }
-
-        // Chamar verificação ao carregar
-        window.addEventListener('load', checkLoggedUser);
-
-        // ========== SUBMISSÃO DO FORMULÁRIO ==========
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const isNameValid = validateName();
-            const isEmailValid = validateEmail();
-            const isPasswordValid = validatePassword();
-            const isConfirmValid = validateConfirm();
-            const isTermsChecked = termsCheck.checked;
-
-            if (!isTermsChecked) {
-                alert('Você deve aceitar os Termos de Uso e Política de Privacidade.');
-                return;
+            function getUsers() {
+                const users = localStorage.getItem(STORAGE_USERS);
+                return users ? JSON.parse(users) : [];
             }
 
-            if (isNameValid && isEmailValid && isPasswordValid && isConfirmValid) {
-                const email = emailInput.value.trim();
-                const name = nameInput.value.trim();
-                const password = passwordInput.value; // Em um app real, isso seria hasheado
+            function getCurrentUser() {
+                const user = localStorage.getItem(STORAGE_CURRENT);
+                return user ? JSON.parse(user) : null;
+            }
 
-                // Verificar se o e-mail já está cadastrado
-                const existingUser = findUserByEmail(email);
-                if (existingUser) {
-                    // Sugere login
-                    loginSuggestion.style.display = 'block';
-                    // Mostra uma mensagem de erro no campo de e-mail
-                    setFieldStatus('email', false, 'E-mail já cadastrado. Faça login.');
+            function setCurrentUser(user) {
+                localStorage.setItem(STORAGE_CURRENT, JSON.stringify(user));
+            }
+
+            function addUser(user) {
+                const users = getUsers();
+                users.push(user);
+                localStorage.setItem(STORAGE_USERS, JSON.stringify(users));
+            }
+
+            function findUserByEmail(email) {
+                const users = getUsers();
+                return users.find(u => u.email === email);
+            }
+
+            // Verificar usuário logado
+            function checkLoggedUser() {
+                const currentUser = getCurrentUser();
+                if (currentUser) {
+                    userEmailDisplay.textContent = currentUser.email;
+                    userBanner.style.display = 'flex';
+                }
+            }
+            checkLoggedUser();
+
+            // Submissão
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const isNameValid = validateName();
+                const isEmailValid = validateEmail();
+                const isPasswordValid = validatePassword();
+                const isConfirmValid = validateConfirm();
+                const isTermsChecked = termsCheck.checked;
+
+                if (!isTermsChecked) {
+                    alert('Você deve aceitar os Termos de Uso e Política de Privacidade.');
                     return;
                 }
 
-                // Criar novo usuário
-                const newUser = { email, name, password }; // Salvar senha só para simulação
-                addUser(newUser);
-                setCurrentUser(newUser); // Já loga o usuário
+                if (isNameValid && isEmailValid && isPasswordValid && isConfirmValid) {
+                    const email = emailInput.value.trim();
+                    const name = nameInput.value.trim();
+                    const password = passwordInput.value;
 
-                // Animação de sucesso
-                const successOverlay = document.getElementById('successOverlay');
-                successOverlay.classList.add('active');
+                    const existingUser = findUserByEmail(email);
+                    if (existingUser) {
+                        loginSuggestion.style.display = 'block';
+                        setFieldStatus('email', false, 'E-mail já cadastrado. Faça login.');
+                        return;
+                    }
 
-                // Redirecionar após 2 segundos
-                setTimeout(() => {
-                    window.location.href = 'pagina1.html';
-                }, 2000);
-            } else {
-                alert('Por favor, preencha todos os campos corretamente.');
-            }
-        });
+                    const newUser = { email, name, password };
+                    addUser(newUser);
+                    setCurrentUser(newUser);
 
-        // ========== AJUSTE NA ANIMAÇÃO DE DIGITAÇÃO ==========
-        // (já feito no CSS: texto mais explicativo, steps aumentado)
+                    const successOverlay = document.getElementById('successOverlay');
+                    successOverlay.classList.add('active');
+
+                    setTimeout(() => {
+                        window.location.href = 'pagina1.html';
+                    }, 2000);
+                } else {
+                    alert('Por favor, preencha todos os campos corretamente.');
+                }
+            });
+
+            // Ajuste para mobile: desabilitar animação de digitação se necessário (já feito no CSS)
+        })();
     </script>
 </body>
 </html>
