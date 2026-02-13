@@ -21,10 +21,9 @@
             --gray-700: #333333;
             --gray-500: #4d4d4d;
             --gray-300: #808080;
-            --glow: rgba(255,255,255,0.6);
-            --accent: #00ffff;
-            --purple: #8a2be2;
-            --blue: #4169e1;
+            --glow: rgba(255,255,255,0.7);
+            --accent: #7ff0ff;
+            --purple: #b78aff;
         }
 
         body {
@@ -36,8 +35,8 @@
             position: relative;
         }
 
-        /* Fundo galáctico com partículas aprimoradas */
-        #galaxy {
+        /* Fundo galáctico com partículas e símbolos */
+        #particles {
             position: fixed;
             top: 0;
             left: 0;
@@ -46,85 +45,49 @@
             z-index: 0;
             pointer-events: none;
             overflow: hidden;
-            background: radial-gradient(ellipse at 40% 50%, rgba(20,20,40,0.8) 0%, transparent 60%),
-                        radial-gradient(ellipse at 80% 30%, rgba(40,20,60,0.5) 0%, transparent 70%);
         }
 
-        /* Estrelas pequenas */
-        .star {
+        .particle, .symbol {
             position: absolute;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 0 10px white;
-            animation: twinkle 4s infinite alternate;
-        }
-
-        @keyframes twinkle {
-            0% { opacity: 0.2; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.2); }
-        }
-
-        /* Partículas maiores tipo planetas */
-        .planet-particle {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, #fff, #aaccff, #6a5acd);
-            filter: blur(2px);
-            opacity: 0.6;
-            animation: floatPlanet 30s infinite linear;
-        }
-
-        @keyframes floatPlanet {
-            0% { transform: translateY(100vh) translateX(0) rotate(0deg); }
-            100% { transform: translateY(-100vh) translateX(20vw) rotate(360deg); }
-        }
-
-        /* Nebulosas suaves */
-        .nebula {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(100,50,150,0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            filter: blur(40px);
-            animation: nebulaMove 60s infinite alternate;
-        }
-
-        @keyframes nebulaMove {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(10%, 10%) scale(1.2); }
-        }
-
-        /* Frases flutuantes */
-        .floating-phrase {
-            position: absolute;
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: rgba(255,255,255,0.1);
-            white-space: nowrap;
             pointer-events: none;
-            animation: phraseFloat 20s linear infinite;
-            z-index: 1;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(255,255,255,0.2);
+            opacity: 0.5;
+            animation: float 25s infinite linear;
         }
 
-        @keyframes phraseFloat {
-            0% { transform: translateX(-20%) translateY(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.3; }
-            90% { opacity: 0.3; }
-            100% { transform: translateX(120vw) translateY(-50vh) rotate(360deg); opacity: 0; }
+        .particle {
+            width: 4px;
+            height: 4px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--glow);
         }
 
-        /* Loading Screen */
+        .symbol {
+            font-size: 1.5rem;
+            color: rgba(200,200,255,0.2);
+            font-weight: 300;
+            text-shadow: 0 0 15px var(--accent);
+            animation: floatSymbol 30s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0.2; }
+            100% { transform: translateY(-100vh) translateX(20vw) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes floatSymbol {
+            0% { transform: translateY(120vh) translateX(-10vw) rotate(0deg); opacity: 0.1; }
+            100% { transform: translateY(-120vh) translateX(30vw) rotate(720deg); opacity: 0; }
+        }
+
+        /* Loading Screen aprimorado com quiz */
         .loading-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.96);
             backdrop-filter: blur(15px);
             display: flex;
             flex-direction: column;
@@ -141,21 +104,21 @@
         }
 
         .quiz-container {
-            max-width: 600px;
+            max-width: 700px;
             width: 100%;
-            background: rgba(10,10,20,0.7);
-            border: 1px solid var(--purple);
-            border-radius: 24px;
+            background: rgba(20,20,30,0.8);
+            border: 1px solid var(--gray-700);
+            border-radius: 32px;
             padding: 2.5rem;
-            box-shadow: 0 0 60px rgba(138,43,226,0.3);
+            box-shadow: 0 0 80px rgba(123, 180, 255, 0.2);
             margin-bottom: 2rem;
             backdrop-filter: blur(5px);
         }
 
         .quiz-container h2 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #fff, #aaf0ff, #dda0dd);
+            background: linear-gradient(135deg, #fff, #aac0ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -170,7 +133,6 @@
             font-size: 1.4rem;
             font-weight: 600;
             margin-bottom: 1.5rem;
-            color: var(--white);
         }
 
         .quiz-options {
@@ -183,35 +145,25 @@
         .quiz-option {
             background: rgba(255,255,255,0.03);
             border: 1px solid var(--gray-700);
-            border-radius: 40px;
-            padding: 1rem 1.5rem;
+            border-radius: 60px;
+            padding: 1rem 1.8rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: 0.3s;
             font-size: 1rem;
-            color: var(--gray-300);
         }
 
         .quiz-option:hover {
-            background: rgba(138,43,226,0.2);
-            border-color: var(--purple);
+            background: rgba(255,255,255,0.15);
+            border-color: var(--white);
             transform: scale(1.02);
-            color: var(--white);
+            box-shadow: 0 0 25px var(--glow);
         }
 
         .quiz-option.selected {
-            background: linear-gradient(135deg, var(--purple), var(--blue));
-            color: var(--white);
+            background: var(--white);
+            color: var(--black);
             border-color: var(--white);
             font-weight: 600;
-            box-shadow: 0 0 20px var(--purple);
-        }
-
-        .quiz-feedback {
-            margin-top: 1rem;
-            font-size: 1rem;
-            min-height: 2rem;
-            color: var(--accent);
-            text-align: center;
         }
 
         .loading-progress {
@@ -220,72 +172,57 @@
             background: var(--gray-900);
             border-radius: 4px;
             overflow: hidden;
-            margin: 2rem 0;
+            margin: 2rem 0 1rem;
         }
 
         .loading-bar {
             height: 100%;
             width: 0;
-            background: linear-gradient(90deg, var(--purple), var(--blue), var(--accent));
+            background: linear-gradient(90deg, var(--accent), var(--purple));
             transition: width 0.1s linear;
-            box-shadow: 0 0 20px var(--glow);
+            box-shadow: 0 0 20px var(--accent);
         }
 
-        .progress-text {
-            color: var(--gray-300);
-            font-size: 0.9rem;
-        }
-
-        .enter-button {
-            background: linear-gradient(135deg, var(--purple), var(--blue));
-            border: none;
-            color: white;
-            font-size: 1.8rem;
+        .enter-btn {
+            background: transparent;
+            border: 2px solid var(--white);
+            color: var(--white);
+            padding: 1rem 3rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            padding: 1.5rem 4rem;
-            border-radius: 60px;
+            border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 0 30px var(--purple);
             transition: 0.4s;
             margin-top: 2rem;
-            opacity: 0;
-            transform: scale(0.8);
+            opacity: 0.5;
             pointer-events: none;
-            border: 2px solid rgba(255,255,255,0.3);
+            box-shadow: 0 0 15px var(--glow);
         }
 
-        .enter-button.visible {
+        .enter-btn.active {
             opacity: 1;
-            transform: scale(1);
-            pointer-events: auto;
-            animation: pulseButton 2s infinite;
+            pointer-events: all;
+            background: var(--white);
+            color: var(--black);
+            box-shadow: 0 0 40px var(--white);
         }
 
-        @keyframes pulseButton {
-            0%, 100% { box-shadow: 0 0 30px var(--purple); }
-            50% { box-shadow: 0 0 60px var(--blue); }
-        }
-
-        .enter-button:hover {
+        .enter-btn.active:hover {
             transform: scale(1.05);
-            background: linear-gradient(135deg, var(--blue), var(--purple));
+            background: transparent;
+            color: var(--white);
         }
 
-        /* Conteúdo principal - inicialmente oculto */
+        /* Conteúdo principal */
         .main-content {
             position: relative;
             z-index: 10;
-            display: none;
+            opacity: 0;
+            animation: fadeInMain 1s ease forwards;
             min-height: 100vh;
         }
 
-        .main-content.visible {
-            display: block;
-            animation: fadeInMain 1s ease;
-        }
-
         @keyframes fadeInMain {
-            from { opacity: 0; }
             to { opacity: 1; }
         }
 
@@ -300,48 +237,33 @@
             border-bottom: 1px solid var(--gray-700);
             z-index: 100;
             display: flex;
-            justify-content: space-between;
+            justify-content: center; /* centraliza o logo */
             align-items: center;
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            letter-spacing: 4px;
-            text-shadow: 0 0 15px rgba(255,255,255,0.5);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--gray-300);
-            text-decoration: none;
-            transition: 0.3s;
-            font-weight: 500;
-        }
-
-        .nav-links a:hover {
-            color: var(--white);
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 6px;
+            text-shadow: 0 0 20px var(--accent);
+            color: white;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 6rem 2rem 2rem;
+            padding: 8rem 2rem 2rem;
         }
 
         .hero {
             text-align: center;
-            margin: 4rem 0 6rem;
+            margin: 2rem 0 5rem;
         }
 
         .hero h1 {
             font-size: 5rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #fff, #aaccff, #dda0dd);
+            background: linear-gradient(135deg, #fff, #aaccff, #ffffff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 1rem;
@@ -350,7 +272,7 @@
 
         @keyframes glowText {
             0%, 100% { text-shadow: 0 0 20px rgba(255,255,255,0.3); }
-            50% { text-shadow: 0 0 40px rgba(170,240,255,0.8); }
+            50% { text-shadow: 0 0 50px var(--accent); }
         }
 
         .hero .sub {
@@ -370,20 +292,20 @@
             display: block;
             width: 100px;
             height: 2px;
-            background: linear-gradient(90deg, var(--purple), var(--blue));
+            background: var(--white);
             margin: 1rem auto;
-            box-shadow: 0 0 15px var(--glow);
+            box-shadow: 0 0 20px var(--accent);
         }
 
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
             margin: 3rem 0;
         }
 
         .card {
-            background: rgba(20,20,30,0.7);
+            background: rgba(20,20,25,0.7);
             backdrop-filter: blur(5px);
             border: 1px solid var(--gray-700);
             border-radius: 24px;
@@ -405,16 +327,13 @@
 
         .card:hover {
             transform: translateY(-10px) scale(1.02);
-            border-color: var(--purple);
-            box-shadow: 0 20px 40px rgba(138,43,226,0.2);
+            border-color: var(--white);
+            box-shadow: 0 20px 40px rgba(255,255,255,0.1);
         }
 
         .card h3 {
             font-size: 1.8rem;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #fff, #dda0dd);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
         .card p {
@@ -422,6 +341,7 @@
             line-height: 1.8;
         }
 
+        /* Botões */
         .btn-group {
             display: flex;
             gap: 2rem;
@@ -448,40 +368,23 @@
             overflow: hidden;
         }
 
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
         .btn:hover {
             background: var(--white);
             color: var(--black);
-            box-shadow: 0 0 30px rgba(255,255,255,0.7);
+            box-shadow: 0 0 40px var(--white);
         }
 
+        /* Seção de depoimentos */
         .testimonials {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
             margin: 3rem 0;
         }
 
         .testimonial {
             background: rgba(255,255,255,0.02);
-            border-left: 4px solid var(--purple);
+            border-left: 4px solid var(--accent);
             padding: 1.5rem;
             border-radius: 12px;
             font-style: italic;
@@ -494,17 +397,113 @@
             font-weight: 500;
         }
 
-        .quiz-fixed {
-            background: rgba(10,10,20,0.5);
+        /* Formulário de redação */
+        .essay-form {
+            background: rgba(20,20,30,0.8);
             border-radius: 24px;
-            padding: 2rem;
+            padding: 2.5rem;
             margin: 4rem 0;
-            border: 1px dashed var(--purple);
+            border: 1px solid var(--gray-700);
         }
 
-        .quiz-fixed h3 {
+        .essay-form h3 {
             font-size: 2rem;
             margin-bottom: 1rem;
+        }
+
+        .essay-form textarea {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--gray-900);
+            border: 1px solid var(--gray-700);
+            border-radius: 16px;
+            color: var(--white);
+            font-size: 1rem;
+            margin: 1.5rem 0;
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .essay-form input {
+            width: 100%;
+            padding: 1rem;
+            background: var(--gray-900);
+            border: 1px solid var(--gray-700);
+            border-radius: 40px;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .essay-form button {
+            background: var(--white);
+            color: var(--black);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .essay-form button:hover {
+            background: transparent;
+            color: var(--white);
+            border: 1px solid var(--white);
+        }
+
+        /* Modal "Saiba mais" */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(8px);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--gray-900);
+            max-width: 600px;
+            width: 90%;
+            padding: 2.5rem;
+            border-radius: 32px;
+            border: 1px solid var(--white);
+            box-shadow: 0 0 50px var(--accent);
+        }
+
+        .modal-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-content p {
+            color: var(--gray-300);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .close-modal {
+            background: transparent;
+            border: 1px solid var(--white);
+            color: var(--white);
+            padding: 0.7rem 2rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .close-modal:hover {
+            background: var(--white);
+            color: var(--black);
         }
 
         footer {
@@ -516,42 +515,32 @@
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 3rem; }
-            .navbar { padding: 1rem; }
-            .enter-button { font-size: 1.4rem; padding: 1rem 2rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Fundo galáctico -->
-    <div id="galaxy"></div>
+    <!-- Fundo galáctico com partículas e símbolos -->
+    <div id="particles"></div>
 
-    <!-- Loading Screen com Quiz e botão de entrada -->
+    <!-- Loading Screen com Quiz obrigatório -->
     <div class="loading-screen" id="loadingScreen">
         <div class="quiz-container" id="quizContainer">
             <h2>Bem-vindo ao Nexus IA</h2>
-            <p>Responda para personalizar sua experiência e desbloquear o futuro</p>
-            <div id="quizArea">
-                <!-- Perguntas serão inseridas via JS -->
-            </div>
+            <p>Responda às perguntas para desbloquear o acesso à plataforma.</p>
+            <div id="quizArea"></div>
             <div class="quiz-feedback" id="quizFeedback"></div>
         </div>
         <div class="loading-progress">
             <div class="loading-bar" id="loadingBar"></div>
         </div>
-        <div class="progress-text" id="progressText">Inicializando 0%</div>
-        <button class="enter-button" id="enterButton">🌟 Entrar no Nexus 🌟</button>
+        <div class="progress-text" id="progressText">Carregando 0%</div>
+        <button class="enter-btn" id="enterBtn">Entrar no Nexus</button>
     </div>
 
     <!-- Conteúdo Principal -->
     <div class="main-content" id="mainContent">
         <nav class="navbar">
-            <div class="logo">NEXUS IA</div>
-            <div class="nav-links">
-                <a href="#">Início</a>
-                <a href="#">Vibezz</a>
-                <a href="#">Nexus IA</a>
-                <a href="#">Contato</a>
-            </div>
+            <div class="logo">✦ NEXUS IA ✦</div>
         </nav>
 
         <div class="container">
@@ -565,19 +554,19 @@
                 <div class="cards-grid">
                     <div class="card">
                         <h3>🧠 Aprendizado Profundo</h3>
-                        <p>Nossa IA estuda seu comportamento e oferece conexões genuínas, não apenas algoritmos superficiais. Ela aprende com suas interações para recomendar oportunidades alinhadas ao seu perfil.</p>
+                        <p>Nossa IA estuda seu comportamento e oferece conexões genuínas, não apenas algoritmos superficiais.</p>
                     </div>
                     <div class="card">
                         <h3>🚀 Descoberta de Talentos</h3>
-                        <p>Artistas, criadores e profissionais são identificados por nossa rede neural e apresentados a empresas, marcas e colaboradores em potencial. Seu talento não passa despercebido.</p>
+                        <p>Artistas, criadores e profissionais são identificados e apresentados a oportunidades reais.</p>
                     </div>
                     <div class="card">
                         <h3>🔒 Privacidade Primeiro</h3>
-                        <p>Seus dados pertencem a você. Usamos criptografia de ponta a ponta e anonimização para garantir que suas informações estejam sempre seguras e sob seu controle.</p>
+                        <p>Seus dados pertencem a você. Usamos criptografia de ponta a ponta e anonimização.</p>
                     </div>
                     <div class="card">
                         <h3>🌍 Rede Global</h3>
-                        <p>Conecte-se com pessoas e marcas de todo o mundo que compartilham seus interesses. A IA quebra barreiras linguísticas e culturais para criar conexões significativas.</p>
+                        <p>Conecte-se com pessoas e marcas de todo o mundo que compartilham seus interesses.</p>
                     </div>
                 </div>
             </section>
@@ -587,128 +576,108 @@
                 <div class="cards-grid">
                     <div class="card">
                         <h3>📊 Análise Preditiva</h3>
-                        <p>Antecipamos tendências e mostramos seu potencial de crescimento antes mesmo de você perceber. Receba relatórios detalhados sobre seu desempenho e áreas de melhoria.</p>
+                        <p>Antecipamos tendências e mostramos seu potencial de crescimento antes mesmo de você perceber.</p>
                     </div>
                     <div class="card">
                         <h3>🎯 Match Inteligente</h3>
-                        <p>Nossa IA encontra colaboradores, mentores e fãs ideais para o seu perfil. O match não é baseado apenas em interesses, mas em compatibilidade de estilo e objetivos.</p>
+                        <p>Nossa IA encontra colaboradores, mentores e fãs ideais para o seu perfil.</p>
                     </div>
                     <div class="card">
                         <h3>💡 Insights Criativos</h3>
-                        <p>Receba sugestões de conteúdo e parcerias baseadas em dados reais do mercado. A IA analisa o que está em alta e adapta recomendações para seu nicho.</p>
+                        <p>Receba sugestões de conteúdo e parcerias baseadas em dados reais do mercado.</p>
                     </div>
                     <div class="card">
                         <h3>⚡ Monetização Automática</h3>
-                        <p>Identificamos oportunidades de patrocínio e venda de serviços automaticamente. Negociações assistidas por IA para você conseguir os melhores contratos.</p>
+                        <p>Identificamos oportunidades de patrocínio e venda de serviços automaticamente.</p>
                     </div>
                 </div>
             </section>
 
-            <section class="testimonials">
+            <!-- Seção de depoimentos (dinâmica) -->
+            <h2 class="section-title">O que dizem nossos usuários</h2>
+            <div class="testimonials" id="testimonialsList">
                 <div class="testimonial">
-                    <p>"O Nexus IA me conectou com um produtor musical dos EUA. Minha carreira mudou completamente! Hoje tenho parcerias internacionais que nunca imaginei."</p>
+                    <p>"O Nexus IA me conectou com um produtor musical dos EUA. Minha carreira mudou completamente!"</p>
                     <p class="author">— Ana Clara, cantora</p>
                 </div>
                 <div class="testimonial">
-                    <p>"Como designer, recebi propostas de empresas que nunca imaginaria. A IA realmente entende meu estilo e me coloca em contato com marcas que valorizam meu trabalho."</p>
-                    <p class="author">— Marcos Silva, designer gráfico</p>
+                    <p>"Como designer, recebi propostas de empresas que nunca imaginaria. A IA realmente entende meu estilo."</p>
+                    <p class="author">— Marcos Silva, designer</p>
                 </div>
                 <div class="testimonial">
-                    <p>"Plataforma revolucionária. Finalmente uma rede que valoriza o talento real e não apenas o número de seguidores. A IA me ajudou a encontrar mentores incríveis."</p>
+                    <p>"Plataforma revolucionária. Finalmente uma rede que valoriza o talento real."</p>
                     <p class="author">— Juliana Mendes, fotógrafa</p>
                 </div>
-            </section>
-
-            <!-- Quiz fixo na página (opcional) -->
-            <div class="quiz-fixed">
-                <h3>Descubra seu potencial com Nexus IA</h3>
-                <p>Responda nosso quiz rápido e veja como podemos impulsionar sua carreira.</p>
-                <button class="btn" onclick="alert('Quiz interativo em desenvolvimento!')">Começar Quiz</button>
             </div>
 
+            <!-- Formulário para envio de redação/feedback -->
+            <div class="essay-form">
+                <h3>Quero fazer parte</h3>
+                <p>Conte-nos sobre seu talento e o que você espera do Nexus IA. Sua mensagem poderá aparecer nos depoimentos.</p>
+                <input type="text" id="authorName" placeholder="Seu nome (ou pseudônimo)" required>
+                <textarea id="essayText" placeholder="Escreva aqui sua redação, feedback ou mensagem..."></textarea>
+                <button id="submitEssay">Enviar mensagem</button>
+            </div>
+
+            <!-- Botões principais -->
             <div class="btn-group">
-                <a href="#" class="btn">Quero fazer parte</a>
-                <a href="#" class="btn">Saiba mais</a>
+                <a href="#" class="btn" id="openEssayBtn">📝 Quero fazer parte</a>
+                <a href="#" class="btn" id="openSaibaMais">🔍 Saiba mais</a>
             </div>
+        </div>
 
-            <footer>
-                © 2026 Nexus IA - Todos os direitos reservados. <br>
-                Uma iniciativa da NEAJ Nexus Labs.
-            </footer>
+        <footer>
+            © 2026 Nexus IA — Todos os direitos reservados.
+        </footer>
+    </div>
+
+    <!-- Modal "Saiba mais" -->
+    <div class="modal" id="saibaMaisModal">
+        <div class="modal-content">
+            <h2>🚀 Sobre o Nexus IA</h2>
+            <p>O Nexus IA é uma plataforma de inteligência artificial desenvolvida para conectar talentos emergentes a oportunidades reais. Utilizamos redes neurais avançadas para analisar perfis, comportamentos e tendências, criando matches precisos entre artistas, criadores, empresas e marcas.</p>
+            <p><strong>Em breve:</strong> Lançaremos ferramentas exclusivas de monetização, portfólio inteligente e curadoria automática de conteúdo. Fique atento!</p>
+            <button class="close-modal" id="closeModalBtn">Fechar</button>
         </div>
     </div>
 
     <script>
-        // ========== CRIAÇÃO DO CÉU GALÁCTICO ==========
-        function createGalaxy() {
-            const galaxy = document.getElementById('galaxy');
-
-            // Nebulosas
-            for (let i = 0; i < 5; i++) {
-                const nebula = document.createElement('div');
-                nebula.className = 'nebula';
-                nebula.style.left = Math.random() * 100 + '%';
-                nebula.style.top = Math.random() * 100 + '%';
-                nebula.style.background = `radial-gradient(circle, rgba(${100+Math.random()*100},${50+Math.random()*100},${150+Math.random()*100},0.15) 0%, transparent 70%)`;
-                nebula.style.animationDelay = Math.random() * 30 + 's';
-                galaxy.appendChild(nebula);
+        // ========== FUNDO GALÁCTICO ==========
+        function createParticlesAndSymbols() {
+            const container = document.getElementById('particles');
+            // Partículas (bolinhas)
+            for (let i = 0; i < 60; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 30 + 's';
+                particle.style.width = (Math.random() * 8 + 2) + 'px';
+                particle.style.height = particle.style.width;
+                container.appendChild(particle);
             }
-
-            // Estrelas pequenas (mais numerosas)
-            for (let i = 0; i < 200; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.width = (Math.random() * 3 + 1) + 'px';
-                star.style.height = star.style.width;
-                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                star.style.animationDelay = Math.random() * 5 + 's';
-                galaxy.appendChild(star);
-            }
-
-            // Partículas planetárias (maiores)
+            // Símbolos (estrelas, infinito, etc)
+            const symbols = ['✧', '✦', '∞', '∇', '⚡', '◈', '◎', '⬩', '💫', '🌌'];
             for (let i = 0; i < 30; i++) {
-                const planet = document.createElement('div');
-                planet.className = 'planet-particle';
-                planet.style.left = Math.random() * 100 + '%';
-                planet.style.width = (Math.random() * 20 + 5) + 'px';
-                planet.style.height = planet.style.width;
-                planet.style.background = `radial-gradient(circle at 30% 30%, #fff, #${Math.floor(Math.random()*16777215).toString(16)})`;
-                planet.style.animationDelay = Math.random() * 20 + 's';
-                planet.style.animationDuration = (Math.random() * 30 + 20) + 's';
-                galaxy.appendChild(planet);
-            }
-
-            // Frases flutuantes
-            const phrases = [
-                'Nexus IA', 'Futuro', 'Conexão', 'Talento', 'Inovação',
-                'IA Ética', 'Rede Neural', 'Oportunidade', 'Criatividade',
-                'Revolução', 'Vibezz', 'Artistas', 'Música', 'Design',
-                'Galáxia', 'Estrelas', 'Infinito', 'Potencial'
-            ];
-            for (let i = 0; i < 25; i++) {
-                const phrase = document.createElement('div');
-                phrase.className = 'floating-phrase';
-                phrase.textContent = phrases[Math.floor(Math.random() * phrases.length)];
-                phrase.style.top = Math.random() * 100 + '%';
-                phrase.style.left = Math.random() * 100 + '%';
-                phrase.style.fontSize = (Math.random() * 1.5 + 0.8) + 'rem';
-                phrase.style.animationDuration = (Math.random() * 20 + 15) + 's';
-                phrase.style.animationDelay = Math.random() * 10 + 's';
-                galaxy.appendChild(phrase);
+                const sym = document.createElement('div');
+                sym.className = 'symbol';
+                sym.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                sym.style.left = Math.random() * 100 + '%';
+                sym.style.top = Math.random() * 100 + '%';
+                sym.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+                sym.style.animationDelay = Math.random() * 20 + 's';
+                sym.style.animationDuration = (Math.random() * 30 + 20) + 's';
+                container.appendChild(sym);
             }
         }
+        createParticlesAndSymbols();
 
-        createGalaxy();
-
-        // ========== QUIZ INTERATIVO ==========
+        // ========== LOADING COM QUIZ OBRIGATÓRIO ==========
         const loadingScreen = document.getElementById('loadingScreen');
         const loadingBar = document.getElementById('loadingBar');
         const progressText = document.getElementById('progressText');
         const quizArea = document.getElementById('quizArea');
         const quizFeedback = document.getElementById('quizFeedback');
-        const enterButton = document.getElementById('enterButton');
+        const enterBtn = document.getElementById('enterBtn');
         const mainContent = document.getElementById('mainContent');
 
         const questions = [
@@ -727,62 +696,45 @@
         ];
 
         let currentQuestion = 0;
-        let answers = [];
+        let answers = [null, null, null]; // armazena índice da resposta
         let quizCompleted = false;
-        let loadingComplete = false;
 
         function renderQuestion() {
             const q = questions[currentQuestion];
             let html = `<div class="quiz-question">${q.question}</div>`;
             html += '<div class="quiz-options">';
             q.options.forEach((opt, idx) => {
-                html += `<div class="quiz-option" data-opt="${idx}">${opt}</div>`;
+                const selectedClass = (answers[currentQuestion] === idx) ? 'selected' : '';
+                html += `<div class="quiz-option ${selectedClass}" data-opt="${idx}">${opt}</div>`;
             });
             html += '</div>';
             quizArea.innerHTML = html;
 
-            // Adicionar eventos
             document.querySelectorAll('.quiz-option').forEach(opt => {
                 opt.addEventListener('click', function() {
-                    // Remove selected de todos
-                    document.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
-                    this.classList.add('selected');
-                    const selectedIdx = this.getAttribute('data-opt');
-                    answers[currentQuestion] = {
-                        question: q.question,
-                        answer: q.options[selectedIdx]
-                    };
-
-                    // Pequeno feedback
-                    quizFeedback.textContent = `Resposta: ${q.options[selectedIdx]}`;
-
-                    // Avança para a próxima pergunta após um breve delay
-                    setTimeout(() => {
-                        if (currentQuestion < questions.length - 1) {
-                            currentQuestion++;
-                            renderQuestion();
-                        } else {
-                            // Quiz completo
-                            quizArea.innerHTML = `<div style="text-align:center; padding:2rem;">
-                                <h3>✨ Obrigado por compartilhar! ✨</h3>
-                                <p>Seu perfil está sendo analisado pela nossa IA.</p>
-                                <p style="margin-top:1rem; color:var(--accent);">Aguarde enquanto preparamos o universo Nexus para você.</p>
-                            </div>`;
-                            quizFeedback.innerHTML = '';
-                            quizCompleted = true;
-                            checkReadyToShowButton();
-                        }
-                    }, 500);
+                    const optIdx = parseInt(this.getAttribute('data-opt'));
+                    answers[currentQuestion] = optIdx;
+                    // re-render para mostrar seleção
+                    renderQuestion();
+                    checkAllAnswered();
                 });
             });
         }
 
-        renderQuestion();
+        function checkAllAnswered() {
+            const allAnswered = answers.every(a => a !== null);
+            if (allAnswered && progress >= 100) {
+                enterBtn.classList.add('active');
+                quizCompleted = true;
+            } else {
+                enterBtn.classList.remove('active');
+            }
+        }
 
-        // ========== SIMULAÇÃO DE LOADING (20 SEGUNDOS) ==========
+        // Progresso simulado (20s)
         let progress = 0;
-        const totalTime = 20000; // 20s
-        const interval = 100; // 100ms
+        const totalTime = 20000;
+        const interval = 100;
         const step = (interval / totalTime) * 100;
 
         const loadingInterval = setInterval(() => {
@@ -790,32 +742,99 @@
             if (progress >= 100) {
                 progress = 100;
                 clearInterval(loadingInterval);
-                loadingComplete = true;
-                checkReadyToShowButton();
             }
             loadingBar.style.width = progress + '%';
-            progressText.textContent = `Inicializando ${Math.round(progress)}%`;
+            progressText.textContent = `Carregando ${Math.round(progress)}%`;
+            checkAllAnswered(); // verifica se pode ativar botão
         }, interval);
 
-        function checkReadyToShowButton() {
-            if (quizCompleted && loadingComplete) {
-                enterButton.classList.add('visible');
+        renderQuestion();
+
+        // Botão Entrar
+        enterBtn.addEventListener('click', () => {
+            if (enterBtn.classList.contains('active')) {
+                loadingScreen.classList.add('hidden');
+                mainContent.style.animationDelay = '0s'; // remove delay
+            }
+        });
+
+        // Fallback de segurança: após 25s, se não respondeu, ainda pode entrar? Mas vamos manter bloqueado.
+        setTimeout(() => {
+            if (!quizCompleted && progress >= 100) {
+                // Se passou 25s e ainda não respondeu, mostra mensagem
+                quizFeedback.innerHTML = 'Por favor, responda todas as perguntas para continuar.';
+            }
+        }, 25000);
+
+        // ========== DEPOIMENTOS DINÂMICOS ==========
+        const testimonialsList = document.getElementById('testimonialsList');
+        const authorInput = document.getElementById('authorName');
+        const essayText = document.getElementById('essayText');
+        const submitBtn = document.getElementById('submitEssay');
+
+        function loadTestimonials() {
+            const stored = localStorage.getItem('nexusTestimonials');
+            if (stored) {
+                testimonialsList.innerHTML = JSON.parse(stored);
             }
         }
 
-        // Botão de entrada
-        enterButton.addEventListener('click', () => {
-            loadingScreen.classList.add('hidden');
-            mainContent.classList.add('visible');
+        function saveTestimonials() {
+            localStorage.setItem('nexusTestimonials', JSON.stringify(testimonialsList.innerHTML));
+        }
+
+        submitBtn.addEventListener('click', () => {
+            const name = authorInput.value.trim();
+            const text = essayText.value.trim();
+            if (!name || !text) {
+                alert('Por favor, preencha seu nome e a mensagem.');
+                return;
+            }
+            // Adicionar novo depoimento
+            const newTestimonial = document.createElement('div');
+            newTestimonial.className = 'testimonial';
+            newTestimonial.innerHTML = `<p>"${text}"</p><p class="author">— ${name}</p>`;
+            testimonialsList.appendChild(newTestimonial);
+            saveTestimonials();
+
+            // Limpar campos
+            authorInput.value = '';
+            essayText.value = '';
+            alert('Mensagem enviada com sucesso! Ela aparecerá nos depoimentos.');
         });
 
-        // Fallback: se por algum motivo o loading demorar mais de 25s, força o botão
-        setTimeout(() => {
-            if (!enterButton.classList.contains('visible')) {
-                loadingComplete = true;
-                checkReadyToShowButton();
+        loadTestimonials();
+
+        // ========== BOTÕES ==========
+        // "Quero fazer parte" rola até o formulário
+        document.getElementById('openEssayBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelector('.essay-form').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // "Saiba mais" abre modal
+        const modal = document.getElementById('saibaMaisModal');
+        const closeModal = document.getElementById('closeModalBtn');
+        document.getElementById('openSaibaMais').addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.classList.add('active');
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
             }
-        }, 25000);
+        });
+
+        // Rolar para o formulário também pelo botão do essay fixo (já existe)
+        document.getElementById('openEssayBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelector('.essay-form').scrollIntoView({ behavior: 'smooth' });
+        });
     </script>
 </body>
 </html>
