@@ -66,7 +66,7 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            animation: fadeOut 1s ease-in-out 4s forwards;
+            animation: fadeOut 1s ease-in-out 5s forwards;
             pointer-events: none;
         }
 
@@ -76,18 +76,20 @@
             letter-spacing: 4px;
             animation: scaleIn 1.5s ease-out;
             margin-bottom: 2rem;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+            text-shadow: 0 0 15px rgba(255,255,255,0.7);
         }
 
         .typing-text {
             font-size: 1.5rem;
-            font-weight: 300;
+            font-weight: 600;
             border-right: 2px solid var(--white);
             white-space: nowrap;
             overflow: hidden;
             width: 0;
-            animation: typing 3s steps(30, end) forwards, blink 0.75s step-end infinite;
+            animation: typing 4s steps(55, end) forwards, blink 0.75s step-end infinite;
             margin-bottom: 2rem;
+            text-shadow: 0 0 8px rgba(255,255,255,0.6);
+            max-width: 90%;
         }
 
         .progress-bar {
@@ -102,7 +104,7 @@
             height: 100%;
             width: 0;
             background: var(--white);
-            animation: progressLoad 3.5s ease-in-out forwards;
+            animation: progressLoad 4.5s ease-in-out forwards;
         }
 
         @keyframes fadeOut {
@@ -137,7 +139,7 @@
             position: relative;
             z-index: 1;
             opacity: 0;
-            animation: fadeInContent 1s ease-in 4.5s forwards;
+            animation: fadeInContent 1s ease-in 5.5s forwards;
         }
 
         @keyframes fadeInContent {
@@ -146,7 +148,7 @@
 
         .hero {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 2rem;
         }
 
         .hero h1 {
@@ -170,6 +172,50 @@
         @keyframes slideUp {
             from { transform: translateY(30px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* ========== BANNER DE USUÁRIO EXISTENTE ========== */
+        .user-banner {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--gray-700);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .user-banner p {
+            color: var(--gray-300);
+            font-size: 0.95rem;
+        }
+
+        .user-banner strong {
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .btn-small {
+            background: transparent;
+            border: 1px solid var(--white);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-small:hover {
+            background: var(--white);
+            color: var(--black);
         }
 
         /* ========== FORMULÁRIO ========== */
@@ -393,6 +439,8 @@
             .hero h1 { font-size: 2rem; }
             .container { padding: 1rem; }
             .form-container { padding: 1.5rem; }
+            .typing-text { font-size: 1.2rem; }
+            .user-banner { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
@@ -400,7 +448,7 @@
     <!-- Splash Screen (loading inicial) -->
     <div class="splash-screen">
         <div class="splash-logo">NEAJ NEXUS LABS</div>
-        <div class="typing-text">Bem-vindo ao futuro da IA</div>
+        <div class="typing-text">Inicializando Nexus Core... Conectando à rede neural Vibezz...</div>
         <div class="progress-bar">
             <div class="progress-fill"></div>
         </div>
@@ -412,6 +460,12 @@
         <div class="hero">
             <h1>Entre para o amanhã</h1>
             <p>Crie sua conta e descubra a inteligência artificial que pensa como você.</p>
+        </div>
+
+        <!-- Banner para usuário já cadastrado (será exibido via JS) -->
+        <div id="userBanner" class="user-banner" style="display: none;">
+            <p>Bem-vindo de volta, <strong id="userEmailDisplay"></strong>!</p>
+            <a href="pagina1.html" class="btn-small">Ir para a página principal</a>
         </div>
 
         <div class="form-container">
@@ -448,6 +502,11 @@
 
                 <button type="submit" class="btn" id="submitBtn">Criar Conta</button>
             </form>
+
+            <!-- Link para login caso e-mail já exista -->
+            <div id="loginSuggestion" style="text-align: center; margin-top: 1.5rem; display: none;">
+                <p style="color: var(--gray-300);">Este e-mail já possui cadastro. <a href="pagina1.html" style="color: var(--white);">Clique aqui para entrar</a>.</p>
+            </div>
         </div>
     </div>
 
@@ -484,6 +543,9 @@
         const termsCheck = document.getElementById('terms');
         const form = document.getElementById('registerForm');
         const submitBtn = document.getElementById('submitBtn');
+        const userBanner = document.getElementById('userBanner');
+        const userEmailDisplay = document.getElementById('userEmailDisplay');
+        const loginSuggestion = document.getElementById('loginSuggestion');
 
         const groups = {
             name: document.getElementById('group-name'),
@@ -522,7 +584,6 @@
 
         function setFieldStatus(field, isValid, errorMsg) {
             const group = groups[field];
-            const input = group.querySelector('input');
             const icon = group.querySelector('.validation-icon');
             const error = group.querySelector('.error-message');
 
@@ -574,6 +635,50 @@
             }
         });
 
+        // ========== PERSISTÊNCIA DE CONTA (LOCALSTORAGE) ==========
+        const STORAGE_USERS = 'nexusUsers';
+        const STORAGE_CURRENT = 'nexusCurrentUser';
+
+        // Carregar usuários do localStorage
+        function getUsers() {
+            const users = localStorage.getItem(STORAGE_USERS);
+            return users ? JSON.parse(users) : [];
+        }
+
+        function getCurrentUser() {
+            const user = localStorage.getItem(STORAGE_CURRENT);
+            return user ? JSON.parse(user) : null;
+        }
+
+        function setCurrentUser(user) {
+            localStorage.setItem(STORAGE_CURRENT, JSON.stringify(user));
+        }
+
+        function addUser(user) {
+            const users = getUsers();
+            users.push(user);
+            localStorage.setItem(STORAGE_USERS, JSON.stringify(users));
+        }
+
+        function findUserByEmail(email) {
+            const users = getUsers();
+            return users.find(u => u.email === email);
+        }
+
+        // Verificar se já existe um usuário logado ao carregar a página
+        function checkLoggedUser() {
+            const currentUser = getCurrentUser();
+            if (currentUser) {
+                // Exibe banner com o e-mail do usuário
+                userEmailDisplay.textContent = currentUser.email;
+                userBanner.style.display = 'flex';
+                // Opcional: desabilitar o formulário? Não, mas podemos deixar visível.
+            }
+        }
+
+        // Chamar verificação ao carregar
+        window.addEventListener('load', checkLoggedUser);
+
         // ========== SUBMISSÃO DO FORMULÁRIO ==========
         form.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -584,22 +689,46 @@
             const isConfirmValid = validateConfirm();
             const isTermsChecked = termsCheck.checked;
 
-            if (isNameValid && isEmailValid && isPasswordValid && isConfirmValid && isTermsChecked) {
+            if (!isTermsChecked) {
+                alert('Você deve aceitar os Termos de Uso e Política de Privacidade.');
+                return;
+            }
+
+            if (isNameValid && isEmailValid && isPasswordValid && isConfirmValid) {
+                const email = emailInput.value.trim();
+                const name = nameInput.value.trim();
+                const password = passwordInput.value; // Em um app real, isso seria hasheado
+
+                // Verificar se o e-mail já está cadastrado
+                const existingUser = findUserByEmail(email);
+                if (existingUser) {
+                    // Sugere login
+                    loginSuggestion.style.display = 'block';
+                    // Mostra uma mensagem de erro no campo de e-mail
+                    setFieldStatus('email', false, 'E-mail já cadastrado. Faça login.');
+                    return;
+                }
+
+                // Criar novo usuário
+                const newUser = { email, name, password }; // Salvar senha só para simulação
+                addUser(newUser);
+                setCurrentUser(newUser); // Já loga o usuário
+
                 // Animação de sucesso
                 const successOverlay = document.getElementById('successOverlay');
                 successOverlay.classList.add('active');
 
-                // Simular redirecionamento após 2 segundos
+                // Redirecionar após 2 segundos
                 setTimeout(() => {
                     window.location.href = 'pagina1.html';
                 }, 2000);
             } else {
-                alert('Por favor, preencha todos os campos corretamente e aceite os termos.');
+                alert('Por favor, preencha todos os campos corretamente.');
             }
         });
 
-        // Pequeno efeito de partículas flutuantes (simulado com CSS, mas podemos adicionar algumas dinâmicas)
-        // Já temos o background com gradientes, então não é necessário mais.
+        // ========== AJUSTE NA ANIMAÇÃO DE DIGITAÇÃO ==========
+        // (já feito no CSS: texto mais explicativo, steps aumentado)
     </script>
 </body>
 </html>
