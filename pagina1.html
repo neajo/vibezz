@@ -80,7 +80,7 @@
             100% { transform: translateY(-120vh) translateX(30vw) rotate(720deg); opacity: 0; }
         }
 
-        /* Loading Screen aprimorado com quiz */
+        /* Loading Screen com quiz */
         .loading-screen {
             position: fixed;
             top: 0;
@@ -191,7 +191,7 @@
             font-size: 1.3rem;
             font-weight: 700;
             border-radius: 50px;
-            cursor: pointer;
+            cursor: not-allowed;
             transition: 0.4s;
             margin-top: 2rem;
             opacity: 0.5;
@@ -205,6 +205,7 @@
             background: var(--white);
             color: var(--black);
             box-shadow: 0 0 40px var(--white);
+            cursor: pointer;
         }
 
         .enter-btn.active:hover {
@@ -237,7 +238,7 @@
             border-bottom: 1px solid var(--gray-700);
             z-index: 100;
             display: flex;
-            justify-content: center; /* centraliza o logo */
+            justify-content: center;
             align-items: center;
         }
 
@@ -341,7 +342,6 @@
             line-height: 1.8;
         }
 
-        /* Botões */
         .btn-group {
             display: flex;
             gap: 2rem;
@@ -374,7 +374,6 @@
             box-shadow: 0 0 40px var(--white);
         }
 
-        /* Seção de depoimentos */
         .testimonials {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -397,7 +396,6 @@
             font-weight: 500;
         }
 
-        /* Formulário de redação */
         .essay-form {
             background: rgba(20,20,30,0.8);
             border-radius: 24px;
@@ -451,7 +449,6 @@
             border: 1px solid var(--white);
         }
 
-        /* Modal "Saiba mais" */
         .modal {
             display: none;
             position: fixed;
@@ -519,10 +516,9 @@
     </style>
 </head>
 <body>
-    <!-- Fundo galáctico com partículas e símbolos -->
     <div id="particles"></div>
 
-    <!-- Loading Screen com Quiz obrigatório -->
+    <!-- Loading Screen com Quiz -->
     <div class="loading-screen" id="loadingScreen">
         <div class="quiz-container" id="quizContainer">
             <h2>Bem-vindo ao Nexus IA</h2>
@@ -552,83 +548,45 @@
             <section>
                 <h2 class="section-title">Por que Nexus IA?</h2>
                 <div class="cards-grid">
-                    <div class="card">
-                        <h3>🧠 Aprendizado Profundo</h3>
-                        <p>Nossa IA estuda seu comportamento e oferece conexões genuínas, não apenas algoritmos superficiais.</p>
-                    </div>
-                    <div class="card">
-                        <h3>🚀 Descoberta de Talentos</h3>
-                        <p>Artistas, criadores e profissionais são identificados e apresentados a oportunidades reais.</p>
-                    </div>
-                    <div class="card">
-                        <h3>🔒 Privacidade Primeiro</h3>
-                        <p>Seus dados pertencem a você. Usamos criptografia de ponta a ponta e anonimização.</p>
-                    </div>
-                    <div class="card">
-                        <h3>🌍 Rede Global</h3>
-                        <p>Conecte-se com pessoas e marcas de todo o mundo que compartilham seus interesses.</p>
-                    </div>
+                    <div class="card"><h3>🧠 Aprendizado Profundo</h3><p>Nossa IA estuda seu comportamento e oferece conexões genuínas.</p></div>
+                    <div class="card"><h3>🚀 Descoberta de Talentos</h3><p>Artistas e profissionais são identificados e conectados a oportunidades.</p></div>
+                    <div class="card"><h3>🔒 Privacidade Primeiro</h3><p>Seus dados são protegidos com criptografia de ponta a ponta.</p></div>
+                    <div class="card"><h3>🌍 Rede Global</h3><p>Conecte-se com pessoas e marcas do mundo inteiro.</p></div>
                 </div>
             </section>
 
             <section>
                 <h2 class="section-title">Como a IA Transforma sua Experiência</h2>
                 <div class="cards-grid">
-                    <div class="card">
-                        <h3>📊 Análise Preditiva</h3>
-                        <p>Antecipamos tendências e mostramos seu potencial de crescimento antes mesmo de você perceber.</p>
-                    </div>
-                    <div class="card">
-                        <h3>🎯 Match Inteligente</h3>
-                        <p>Nossa IA encontra colaboradores, mentores e fãs ideais para o seu perfil.</p>
-                    </div>
-                    <div class="card">
-                        <h3>💡 Insights Criativos</h3>
-                        <p>Receba sugestões de conteúdo e parcerias baseadas em dados reais do mercado.</p>
-                    </div>
-                    <div class="card">
-                        <h3>⚡ Monetização Automática</h3>
-                        <p>Identificamos oportunidades de patrocínio e venda de serviços automaticamente.</p>
-                    </div>
+                    <div class="card"><h3>📊 Análise Preditiva</h3><p>Antecipamos tendências e mostramos seu potencial.</p></div>
+                    <div class="card"><h3>🎯 Match Inteligente</h3><p>Encontramos colaboradores e mentores ideais.</p></div>
+                    <div class="card"><h3>💡 Insights Criativos</h3><p>Sugestões baseadas em dados reais do mercado.</p></div>
+                    <div class="card"><h3>⚡ Monetização Automática</h3><p>Identificamos oportunidades de patrocínio.</p></div>
                 </div>
             </section>
 
-            <!-- Seção de depoimentos (dinâmica) -->
             <h2 class="section-title">O que dizem nossos usuários</h2>
             <div class="testimonials" id="testimonialsList">
-                <div class="testimonial">
-                    <p>"O Nexus IA me conectou com um produtor musical dos EUA. Minha carreira mudou completamente!"</p>
-                    <p class="author">— Ana Clara, cantora</p>
-                </div>
-                <div class="testimonial">
-                    <p>"Como designer, recebi propostas de empresas que nunca imaginaria. A IA realmente entende meu estilo."</p>
-                    <p class="author">— Marcos Silva, designer</p>
-                </div>
-                <div class="testimonial">
-                    <p>"Plataforma revolucionária. Finalmente uma rede que valoriza o talento real."</p>
-                    <p class="author">— Juliana Mendes, fotógrafa</p>
-                </div>
+                <div class="testimonial"><p>"O Nexus IA me conectou com um produtor musical dos EUA. Minha carreira mudou!"</p><p class="author">— Ana Clara, cantora</p></div>
+                <div class="testimonial"><p>"Recebi propostas de empresas que nunca imaginei. A IA entende meu estilo."</p><p class="author">— Marcos Silva, designer</p></div>
+                <div class="testimonial"><p>"Plataforma revolucionária. Finalmente uma rede que valoriza o talento real."</p><p class="author">— Juliana Mendes, fotógrafa</p></div>
             </div>
 
-            <!-- Formulário para envio de redação/feedback -->
             <div class="essay-form">
                 <h3>Quero fazer parte</h3>
-                <p>Conte-nos sobre seu talento e o que você espera do Nexus IA. Sua mensagem poderá aparecer nos depoimentos.</p>
+                <p>Conte-nos sobre seu talento. Sua mensagem poderá aparecer nos depoimentos.</p>
                 <input type="text" id="authorName" placeholder="Seu nome (ou pseudônimo)" required>
-                <textarea id="essayText" placeholder="Escreva aqui sua redação, feedback ou mensagem..."></textarea>
+                <textarea id="essayText" placeholder="Escreva aqui sua mensagem..."></textarea>
                 <button id="submitEssay">Enviar mensagem</button>
             </div>
 
-            <!-- Botões principais -->
             <div class="btn-group">
                 <a href="#" class="btn" id="openEssayBtn">📝 Quero fazer parte</a>
                 <a href="#" class="btn" id="openSaibaMais">🔍 Saiba mais</a>
             </div>
         </div>
 
-        <footer>
-            © 2026 Nexus IA — Todos os direitos reservados.
-        </footer>
+        <footer>© 2026 Nexus IA — Todos os direitos reservados.</footer>
     </div>
 
     <!-- Modal "Saiba mais" -->
@@ -636,117 +594,104 @@
         <div class="modal-content">
             <h2>🚀 Sobre o Nexus IA</h2>
             <p>O Nexus IA é uma plataforma de inteligência artificial desenvolvida para conectar talentos emergentes a oportunidades reais. Utilizamos redes neurais avançadas para analisar perfis, comportamentos e tendências, criando matches precisos entre artistas, criadores, empresas e marcas.</p>
-            <p><strong>Em breve:</strong> Lançaremos ferramentas exclusivas de monetização, portfólio inteligente e curadoria automática de conteúdo. Fique atento!</p>
+            <p><strong>Em breve:</strong> Ferramentas exclusivas de monetização, portfólio inteligente e curadoria automática.</p>
             <button class="close-modal" id="closeModalBtn">Fechar</button>
         </div>
     </div>
 
     <script>
-        // ========== FUNDO GALÁCTICO ==========
-        function createParticlesAndSymbols() {
+        // Fundo galáctico
+        (function createGalaxy() {
             const container = document.getElementById('particles');
-            // Partículas (bolinhas)
             for (let i = 0; i < 60; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 30 + 's';
-                particle.style.width = (Math.random() * 8 + 2) + 'px';
-                particle.style.height = particle.style.width;
-                container.appendChild(particle);
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDelay = Math.random() * 30 + 's';
+                p.style.width = (Math.random() * 8 + 2) + 'px';
+                p.style.height = p.style.width;
+                container.appendChild(p);
             }
-            // Símbolos (estrelas, infinito, etc)
             const symbols = ['✧', '✦', '∞', '∇', '⚡', '◈', '◎', '⬩', '💫', '🌌'];
             for (let i = 0; i < 30; i++) {
-                const sym = document.createElement('div');
-                sym.className = 'symbol';
-                sym.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-                sym.style.left = Math.random() * 100 + '%';
-                sym.style.top = Math.random() * 100 + '%';
-                sym.style.fontSize = (Math.random() * 2 + 1) + 'rem';
-                sym.style.animationDelay = Math.random() * 20 + 's';
-                sym.style.animationDuration = (Math.random() * 30 + 20) + 's';
-                container.appendChild(sym);
+                const s = document.createElement('div');
+                s.className = 'symbol';
+                s.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                s.style.left = Math.random() * 100 + '%';
+                s.style.top = Math.random() * 100 + '%';
+                s.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+                s.style.animationDelay = Math.random() * 20 + 's';
+                s.style.animationDuration = (Math.random() * 30 + 20) + 's';
+                container.appendChild(s);
             }
-        }
-        createParticlesAndSymbols();
+        })();
 
-        // ========== LOADING COM QUIZ OBRIGATÓRIO ==========
+        // ===== QUIZ =====
         const loadingScreen = document.getElementById('loadingScreen');
         const loadingBar = document.getElementById('loadingBar');
         const progressText = document.getElementById('progressText');
         const quizArea = document.getElementById('quizArea');
-        const quizFeedback = document.getElementById('quizFeedback');
         const enterBtn = document.getElementById('enterBtn');
         const mainContent = document.getElementById('mainContent');
 
         const questions = [
-            {
-                question: "Qual área melhor descreve seu talento?",
-                options: ["Música", "Artes Visuais", "Escrita", "Tecnologia", "Outro"]
-            },
-            {
-                question: "Você já tentou monetizar seu trabalho online?",
-                options: ["Sim, com sucesso", "Sim, mas sem resultados", "Nunca tentei", "Estou começando"]
-            },
-            {
-                question: "O que você mais busca em uma rede social?",
-                options: ["Visibilidade", "Networking profissional", "Comunidade", "Monetização", "Aprendizado"]
-            }
+            { question: "Qual área melhor descreve seu talento?", options: ["Música", "Artes Visuais", "Escrita", "Tecnologia", "Outro"] },
+            { question: "Você já tentou monetizar seu trabalho online?", options: ["Sim, com sucesso", "Sim, mas sem resultados", "Nunca tentei", "Estou começando"] },
+            { question: "O que você mais busca em uma rede social?", options: ["Visibilidade", "Networking profissional", "Comunidade", "Monetização", "Aprendizado"] }
         ];
 
         let currentQuestion = 0;
-        let answers = [null, null, null]; // armazena índice da resposta
-        let quizCompleted = false;
+        let answers = [null, null, null]; // índices das respostas
 
         function renderQuestion() {
             const q = questions[currentQuestion];
             let html = `<div class="quiz-question">${q.question}</div>`;
             html += '<div class="quiz-options">';
             q.options.forEach((opt, idx) => {
-                const selectedClass = (answers[currentQuestion] === idx) ? 'selected' : '';
-                html += `<div class="quiz-option ${selectedClass}" data-opt="${idx}">${opt}</div>`;
+                const selected = (answers[currentQuestion] === idx) ? 'selected' : '';
+                html += `<div class="quiz-option ${selected}" data-opt="${idx}">${opt}</div>`;
             });
             html += '</div>';
             quizArea.innerHTML = html;
 
             document.querySelectorAll('.quiz-option').forEach(opt => {
                 opt.addEventListener('click', function() {
-                    const optIdx = parseInt(this.getAttribute('data-opt'));
+                    const optIdx = parseInt(this.dataset.opt);
                     answers[currentQuestion] = optIdx;
-                    // re-render para mostrar seleção
-                    renderQuestion();
-                    checkAllAnswered();
+                    
+                    if (currentQuestion < questions.length - 1) {
+                        currentQuestion++;
+                        renderQuestion();
+                    } else {
+                        // Última pergunta respondida
+                        quizArea.innerHTML = `<div style="text-align:center; padding:2rem;"><h3>Obrigado por responder!</h3><p>Agora é só aguardar o carregamento e clicar em Entrar.</p></div>`;
+                    }
+                    checkReady();
                 });
             });
         }
 
-        function checkAllAnswered() {
+        function checkReady() {
             const allAnswered = answers.every(a => a !== null);
             if (allAnswered && progress >= 100) {
                 enterBtn.classList.add('active');
-                quizCompleted = true;
             } else {
                 enterBtn.classList.remove('active');
             }
         }
 
-        // Progresso simulado (20s)
+        // Progresso de 20 segundos
         let progress = 0;
         const totalTime = 20000;
-        const interval = 100;
-        const step = (interval / totalTime) * 100;
+        const step = 100 / (totalTime / 100); // % a cada 100ms
 
-        const loadingInterval = setInterval(() => {
-            progress += step;
-            if (progress >= 100) {
-                progress = 100;
-                clearInterval(loadingInterval);
-            }
+        const progressInterval = setInterval(() => {
+            progress = Math.min(progress + step, 100);
             loadingBar.style.width = progress + '%';
             progressText.textContent = `Carregando ${Math.round(progress)}%`;
-            checkAllAnswered(); // verifica se pode ativar botão
-        }, interval);
+            if (progress >= 100) clearInterval(progressInterval);
+            checkReady();
+        }, 100);
 
         renderQuestion();
 
@@ -754,19 +699,17 @@
         enterBtn.addEventListener('click', () => {
             if (enterBtn.classList.contains('active')) {
                 loadingScreen.classList.add('hidden');
-                mainContent.style.animationDelay = '0s'; // remove delay
+                mainContent.style.animationDelay = '0s';
+            } else {
+                if (answers.some(a => a === null)) {
+                    alert('Responda todas as perguntas primeiro.');
+                } else if (progress < 100) {
+                    alert('Aguarde o carregamento completo.');
+                }
             }
         });
 
-        // Fallback de segurança: após 25s, se não respondeu, ainda pode entrar? Mas vamos manter bloqueado.
-        setTimeout(() => {
-            if (!quizCompleted && progress >= 100) {
-                // Se passou 25s e ainda não respondeu, mostra mensagem
-                quizFeedback.innerHTML = 'Por favor, responda todas as perguntas para continuar.';
-            }
-        }, 25000);
-
-        // ========== DEPOIMENTOS DINÂMICOS ==========
+        // ===== DEPOIMENTOS =====
         const testimonialsList = document.getElementById('testimonialsList');
         const authorInput = document.getElementById('authorName');
         const essayText = document.getElementById('essayText');
@@ -774,66 +717,43 @@
 
         function loadTestimonials() {
             const stored = localStorage.getItem('nexusTestimonials');
-            if (stored) {
-                testimonialsList.innerHTML = JSON.parse(stored);
-            }
+            if (stored) testimonialsList.innerHTML = stored;
         }
-
         function saveTestimonials() {
-            localStorage.setItem('nexusTestimonials', JSON.stringify(testimonialsList.innerHTML));
+            localStorage.setItem('nexusTestimonials', testimonialsList.innerHTML);
         }
+        loadTestimonials();
 
         submitBtn.addEventListener('click', () => {
             const name = authorInput.value.trim();
             const text = essayText.value.trim();
-            if (!name || !text) {
-                alert('Por favor, preencha seu nome e a mensagem.');
-                return;
-            }
-            // Adicionar novo depoimento
+            if (!name || !text) return alert('Preencha nome e mensagem.');
             const newTestimonial = document.createElement('div');
             newTestimonial.className = 'testimonial';
             newTestimonial.innerHTML = `<p>"${text}"</p><p class="author">— ${name}</p>`;
             testimonialsList.appendChild(newTestimonial);
             saveTestimonials();
-
-            // Limpar campos
             authorInput.value = '';
             essayText.value = '';
-            alert('Mensagem enviada com sucesso! Ela aparecerá nos depoimentos.');
+            alert('Mensagem enviada! Aparecerá nos depoimentos.');
         });
 
-        loadTestimonials();
-
-        // ========== BOTÕES ==========
-        // "Quero fazer parte" rola até o formulário
+        // ===== BOTÕES =====
         document.getElementById('openEssayBtn').addEventListener('click', (e) => {
             e.preventDefault();
             document.querySelector('.essay-form').scrollIntoView({ behavior: 'smooth' });
         });
 
-        // "Saiba mais" abre modal
         const modal = document.getElementById('saibaMaisModal');
-        const closeModal = document.getElementById('closeModalBtn');
         document.getElementById('openSaibaMais').addEventListener('click', (e) => {
             e.preventDefault();
             modal.classList.add('active');
         });
-
-        closeModal.addEventListener('click', () => {
+        document.getElementById('closeModalBtn').addEventListener('click', () => {
             modal.classList.remove('active');
         });
-
         window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('active');
-            }
-        });
-
-        // Rolar para o formulário também pelo botão do essay fixo (já existe)
-        document.getElementById('openEssayBtn').addEventListener('click', (e) => {
-            e.preventDefault();
-            document.querySelector('.essay-form').scrollIntoView({ behavior: 'smooth' });
+            if (e.target === modal) modal.classList.remove('active');
         });
     </script>
 </body>
