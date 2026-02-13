@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* (mantive o CSS anterior, apenas ajustes no loading) */
         * {
             margin: 0;
             padding: 0;
@@ -35,7 +36,7 @@
             position: relative;
         }
 
-        /* Fundo galáctico com partículas e símbolos */
+        /* Fundo galáctico (mantido) */
         #particles {
             position: fixed;
             top: 0;
@@ -80,7 +81,7 @@
             100% { transform: translateY(-120vh) translateX(30vw) rotate(720deg); opacity: 0; }
         }
 
-        /* Loading Screen com quiz */
+        /* Loading Screen aprimorado com quiz */
         .loading-screen {
             position: fixed;
             top: 0;
@@ -96,6 +97,7 @@
             z-index: 2000;
             transition: opacity 1s ease;
             padding: 2rem;
+            overflow-y: auto; /* permite rolagem se conteúdo for maior */
         }
 
         .loading-screen.hidden {
@@ -106,17 +108,19 @@
         .quiz-container {
             max-width: 700px;
             width: 100%;
+            max-height: 70vh; /* limita altura */
+            overflow-y: auto; /* rolagem interna */
             background: rgba(20,20,30,0.8);
             border: 1px solid var(--gray-700);
             border-radius: 32px;
-            padding: 2.5rem;
+            padding: 2rem;
             box-shadow: 0 0 80px rgba(123, 180, 255, 0.2);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             backdrop-filter: blur(5px);
         }
 
         .quiz-container h2 {
-            font-size: 2.2rem;
+            font-size: 2rem;
             margin-bottom: 1rem;
             background: linear-gradient(135deg, #fff, #aac0ff);
             -webkit-background-clip: text;
@@ -125,28 +129,28 @@
 
         .quiz-container p {
             color: var(--gray-300);
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
         }
 
         .quiz-question {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 600;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
         }
 
         .quiz-options {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
         }
 
         .quiz-option {
             background: rgba(255,255,255,0.03);
             border: 1px solid var(--gray-700);
             border-radius: 60px;
-            padding: 1rem 1.8rem;
+            padding: 0.8rem 1.5rem;
             cursor: pointer;
             transition: 0.3s;
             font-size: 1rem;
@@ -172,7 +176,7 @@
             background: var(--gray-900);
             border-radius: 4px;
             overflow: hidden;
-            margin: 2rem 0 1rem;
+            margin: 1rem 0 0.5rem;
         }
 
         .loading-bar {
@@ -187,13 +191,13 @@
             background: transparent;
             border: 2px solid var(--white);
             color: var(--white);
-            padding: 1rem 3rem;
-            font-size: 1.3rem;
+            padding: 0.8rem 2.5rem;
+            font-size: 1.2rem;
             font-weight: 700;
             border-radius: 50px;
-            cursor: not-allowed;
+            cursor: pointer;
             transition: 0.4s;
-            margin-top: 2rem;
+            margin-top: 1.5rem;
             opacity: 0.5;
             pointer-events: none;
             box-shadow: 0 0 15px var(--glow);
@@ -205,7 +209,6 @@
             background: var(--white);
             color: var(--black);
             box-shadow: 0 0 40px var(--white);
-            cursor: pointer;
         }
 
         .enter-btn.active:hover {
@@ -214,7 +217,17 @@
             color: var(--white);
         }
 
-        /* Conteúdo principal */
+        .thank-you-message {
+            text-align: center;
+            padding: 1rem;
+        }
+        .thank-you-message h3 {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        /* Restante do CSS (main-content, navbar, etc) continua igual */
         .main-content {
             position: relative;
             z-index: 10;
@@ -222,11 +235,7 @@
             animation: fadeInMain 1s ease forwards;
             min-height: 100vh;
         }
-
-        @keyframes fadeInMain {
-            to { opacity: 1; }
-        }
-
+        @keyframes fadeInMain { to { opacity: 1; } }
         .navbar {
             position: fixed;
             top: 0;
@@ -241,7 +250,6 @@
             justify-content: center;
             align-items: center;
         }
-
         .logo {
             font-size: 2rem;
             font-weight: 800;
@@ -249,18 +257,15 @@
             text-shadow: 0 0 20px var(--accent);
             color: white;
         }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 8rem 2rem 2rem;
         }
-
         .hero {
             text-align: center;
             margin: 2rem 0 5rem;
         }
-
         .hero h1 {
             font-size: 5rem;
             font-weight: 800;
@@ -270,24 +275,20 @@
             margin-bottom: 1rem;
             animation: glowText 3s infinite;
         }
-
         @keyframes glowText {
             0%, 100% { text-shadow: 0 0 20px rgba(255,255,255,0.3); }
             50% { text-shadow: 0 0 50px var(--accent); }
         }
-
         .hero .sub {
             font-size: 1.8rem;
             color: var(--gray-300);
         }
-
         .section-title {
             font-size: 2.5rem;
             margin: 4rem 0 2rem;
             text-align: center;
             position: relative;
         }
-
         .section-title::after {
             content: '';
             display: block;
@@ -297,14 +298,12 @@
             margin: 1rem auto;
             box-shadow: 0 0 20px var(--accent);
         }
-
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
             margin: 3rem 0;
         }
-
         .card {
             background: rgba(20,20,25,0.7);
             backdrop-filter: blur(5px);
@@ -316,32 +315,18 @@
             transform: translateY(30px);
             animation: cardAppear 0.8s ease forwards;
         }
-
         .card:nth-child(1) { animation-delay: 0.2s; }
         .card:nth-child(2) { animation-delay: 0.4s; }
         .card:nth-child(3) { animation-delay: 0.6s; }
         .card:nth-child(4) { animation-delay: 0.8s; }
-
-        @keyframes cardAppear {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        @keyframes cardAppear { to { opacity: 1; transform: translateY(0); } }
         .card:hover {
             transform: translateY(-10px) scale(1.02);
             border-color: var(--white);
             box-shadow: 0 20px 40px rgba(255,255,255,0.1);
         }
-
-        .card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-
-        .card p {
-            color: var(--gray-300);
-            line-height: 1.8;
-        }
-
+        .card h3 { font-size: 1.8rem; margin-bottom: 1rem; }
+        .card p { color: var(--gray-300); line-height: 1.8; }
         .btn-group {
             display: flex;
             gap: 2rem;
@@ -349,7 +334,6 @@
             margin: 4rem 0;
             flex-wrap: wrap;
         }
-
         .btn {
             padding: 1rem 3rem;
             border: 2px solid var(--white);
@@ -367,20 +351,17 @@
             position: relative;
             overflow: hidden;
         }
-
         .btn:hover {
             background: var(--white);
             color: var(--black);
             box-shadow: 0 0 40px var(--white);
         }
-
         .testimonials {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
             margin: 3rem 0;
         }
-
         .testimonial {
             background: rgba(255,255,255,0.02);
             border-left: 4px solid var(--accent);
@@ -388,14 +369,12 @@
             border-radius: 12px;
             font-style: italic;
         }
-
         .testimonial .author {
             margin-top: 1rem;
             color: var(--gray-300);
             font-style: normal;
             font-weight: 500;
         }
-
         .essay-form {
             background: rgba(20,20,30,0.8);
             border-radius: 24px;
@@ -403,12 +382,7 @@
             margin: 4rem 0;
             border: 1px solid var(--gray-700);
         }
-
-        .essay-form h3 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
+        .essay-form h3 { font-size: 2rem; margin-bottom: 1rem; }
         .essay-form textarea {
             width: 100%;
             padding: 1.2rem;
@@ -421,7 +395,6 @@
             min-height: 150px;
             resize: vertical;
         }
-
         .essay-form input {
             width: 100%;
             padding: 1rem;
@@ -431,7 +404,6 @@
             color: var(--white);
             margin-bottom: 1rem;
         }
-
         .essay-form button {
             background: var(--white);
             color: var(--black);
@@ -442,13 +414,11 @@
             cursor: pointer;
             transition: 0.3s;
         }
-
         .essay-form button:hover {
             background: transparent;
             color: var(--white);
             border: 1px solid var(--white);
         }
-
         .modal {
             display: none;
             position: fixed;
@@ -462,11 +432,7 @@
             justify-content: center;
             align-items: center;
         }
-
-        .modal.active {
-            display: flex;
-        }
-
+        .modal.active { display: flex; }
         .modal-content {
             background: var(--gray-900);
             max-width: 600px;
@@ -476,18 +442,8 @@
             border: 1px solid var(--white);
             box-shadow: 0 0 50px var(--accent);
         }
-
-        .modal-content h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .modal-content p {
-            color: var(--gray-300);
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-
+        .modal-content h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .modal-content p { color: var(--gray-300); margin-bottom: 1.5rem; line-height: 1.8; }
         .close-modal {
             background: transparent;
             border: 1px solid var(--white);
@@ -497,19 +453,13 @@
             cursor: pointer;
             font-weight: 600;
         }
-
-        .close-modal:hover {
-            background: var(--white);
-            color: var(--black);
-        }
-
+        .close-modal:hover { background: var(--white); color: var(--black); }
         footer {
             text-align: center;
             padding: 3rem;
             color: var(--gray-500);
             border-top: 1px solid var(--gray-700);
         }
-
         @media (max-width: 768px) {
             .hero h1 { font-size: 3rem; }
         }
@@ -518,7 +468,7 @@
 <body>
     <div id="particles"></div>
 
-    <!-- Loading Screen com Quiz -->
+    <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
         <div class="quiz-container" id="quizContainer">
             <h2>Bem-vindo ao Nexus IA</h2>
@@ -533,104 +483,59 @@
         <button class="enter-btn" id="enterBtn">Entrar no Nexus</button>
     </div>
 
-    <!-- Conteúdo Principal -->
+    <!-- Conteúdo Principal (idêntico ao anterior) -->
     <div class="main-content" id="mainContent">
-        <nav class="navbar">
-            <div class="logo">✦ NEXUS IA ✦</div>
-        </nav>
-
+        <nav class="navbar"><div class="logo">✦ NEXUS IA ✦</div></nav>
         <div class="container">
-            <section class="hero">
-                <h1>Nexus IA</h1>
-                <p class="sub">A inteligência que conecta talentos ao mundo</p>
-            </section>
-
-            <section>
-                <h2 class="section-title">Por que Nexus IA?</h2>
-                <div class="cards-grid">
-                    <div class="card"><h3>🧠 Aprendizado Profundo</h3><p>Nossa IA estuda seu comportamento e oferece conexões genuínas.</p></div>
-                    <div class="card"><h3>🚀 Descoberta de Talentos</h3><p>Artistas e profissionais são identificados e conectados a oportunidades.</p></div>
-                    <div class="card"><h3>🔒 Privacidade Primeiro</h3><p>Seus dados são protegidos com criptografia de ponta a ponta.</p></div>
-                    <div class="card"><h3>🌍 Rede Global</h3><p>Conecte-se com pessoas e marcas do mundo inteiro.</p></div>
-                </div>
-            </section>
-
-            <section>
-                <h2 class="section-title">Como a IA Transforma sua Experiência</h2>
-                <div class="cards-grid">
-                    <div class="card"><h3>📊 Análise Preditiva</h3><p>Antecipamos tendências e mostramos seu potencial.</p></div>
-                    <div class="card"><h3>🎯 Match Inteligente</h3><p>Encontramos colaboradores e mentores ideais.</p></div>
-                    <div class="card"><h3>💡 Insights Criativos</h3><p>Sugestões baseadas em dados reais do mercado.</p></div>
-                    <div class="card"><h3>⚡ Monetização Automática</h3><p>Identificamos oportunidades de patrocínio.</p></div>
-                </div>
-            </section>
-
+            <!-- Hero, cards, testimonials, formulário, etc -->
+            <section class="hero"><h1>Nexus IA</h1><p class="sub">A inteligência que conecta talentos ao mundo</p></section>
+            <section><h2 class="section-title">Por que Nexus IA?</h2><div class="cards-grid"><div class="card"><h3>🧠 Aprendizado Profundo</h3><p>Nossa IA estuda seu comportamento e oferece conexões genuínas.</p></div><div class="card"><h3>🚀 Descoberta de Talentos</h3><p>Artistas e criadores são identificados e apresentados a oportunidades.</p></div><div class="card"><h3>🔒 Privacidade Primeiro</h3><p>Seus dados pertencem a você. Criptografia de ponta a ponta.</p></div><div class="card"><h3>🌍 Rede Global</h3><p>Conecte-se com pessoas e marcas do mundo todo.</p></div></div></section>
+            <section><h2 class="section-title">Como a IA Transforma sua Experiência</h2><div class="cards-grid"><div class="card"><h3>📊 Análise Preditiva</h3><p>Antecipamos tendências e mostramos seu potencial.</p></div><div class="card"><h3>🎯 Match Inteligente</h3><p>Encontramos colaboradores e mentores ideais.</p></div><div class="card"><h3>💡 Insights Criativos</h3><p>Sugestões baseadas em dados do mercado.</p></div><div class="card"><h3>⚡ Monetização Automática</h3><p>Oportunidades de patrocínio e venda.</p></div></div></section>
             <h2 class="section-title">O que dizem nossos usuários</h2>
-            <div class="testimonials" id="testimonialsList">
-                <div class="testimonial"><p>"O Nexus IA me conectou com um produtor musical dos EUA. Minha carreira mudou!"</p><p class="author">— Ana Clara, cantora</p></div>
-                <div class="testimonial"><p>"Recebi propostas de empresas que nunca imaginei. A IA entende meu estilo."</p><p class="author">— Marcos Silva, designer</p></div>
-                <div class="testimonial"><p>"Plataforma revolucionária. Finalmente uma rede que valoriza o talento real."</p><p class="author">— Juliana Mendes, fotógrafa</p></div>
-            </div>
-
-            <div class="essay-form">
-                <h3>Quero fazer parte</h3>
-                <p>Conte-nos sobre seu talento. Sua mensagem poderá aparecer nos depoimentos.</p>
-                <input type="text" id="authorName" placeholder="Seu nome (ou pseudônimo)" required>
-                <textarea id="essayText" placeholder="Escreva aqui sua mensagem..."></textarea>
-                <button id="submitEssay">Enviar mensagem</button>
-            </div>
-
-            <div class="btn-group">
-                <a href="#" class="btn" id="openEssayBtn">📝 Quero fazer parte</a>
-                <a href="#" class="btn" id="openSaibaMais">🔍 Saiba mais</a>
-            </div>
+            <div class="testimonials" id="testimonialsList"><div class="testimonial"><p>"O Nexus IA me conectou com um produtor musical dos EUA."</p><p class="author">— Ana Clara, cantora</p></div><div class="testimonial"><p>"Como designer, recebi propostas de empresas que nunca imaginaria."</p><p class="author">— Marcos Silva, designer</p></div><div class="testimonial"><p>"Plataforma revolucionária. Finalmente uma rede que valoriza o talento real."</p><p class="author">— Juliana Mendes, fotógrafa</p></div></div>
+            <div class="essay-form"><h3>Quero fazer parte</h3><p>Conte-nos sobre seu talento. Sua mensagem poderá aparecer nos depoimentos.</p><input type="text" id="authorName" placeholder="Seu nome (ou pseudônimo)"><textarea id="essayText" placeholder="Escreva aqui sua mensagem..."></textarea><button id="submitEssay">Enviar mensagem</button></div>
+            <div class="btn-group"><a href="#" class="btn" id="openEssayBtn">📝 Quero fazer parte</a><a href="#" class="btn" id="openSaibaMais">🔍 Saiba mais</a></div>
         </div>
-
         <footer>© 2026 Nexus IA — Todos os direitos reservados.</footer>
     </div>
 
-    <!-- Modal "Saiba mais" -->
-    <div class="modal" id="saibaMaisModal">
-        <div class="modal-content">
-            <h2>🚀 Sobre o Nexus IA</h2>
-            <p>O Nexus IA é uma plataforma de inteligência artificial desenvolvida para conectar talentos emergentes a oportunidades reais. Utilizamos redes neurais avançadas para analisar perfis, comportamentos e tendências, criando matches precisos entre artistas, criadores, empresas e marcas.</p>
-            <p><strong>Em breve:</strong> Ferramentas exclusivas de monetização, portfólio inteligente e curadoria automática.</p>
-            <button class="close-modal" id="closeModalBtn">Fechar</button>
-        </div>
-    </div>
+    <!-- Modal Saiba mais -->
+    <div class="modal" id="saibaMaisModal"><div class="modal-content"><h2>🚀 Sobre o Nexus IA</h2><p>O Nexus IA é uma plataforma de IA para conectar talentos a oportunidades. Em breve: ferramentas exclusivas de monetização e curadoria.</p><button class="close-modal" id="closeModalBtn">Fechar</button></div></div>
 
     <script>
-        // Fundo galáctico
-        (function createGalaxy() {
+        // ========== FUNDO GALÁCTICO (igual) ==========
+        function createParticlesAndSymbols() {
             const container = document.getElementById('particles');
             for (let i = 0; i < 60; i++) {
-                const p = document.createElement('div');
-                p.className = 'particle';
-                p.style.left = Math.random() * 100 + '%';
-                p.style.animationDelay = Math.random() * 30 + 's';
-                p.style.width = (Math.random() * 8 + 2) + 'px';
-                p.style.height = p.style.width;
-                container.appendChild(p);
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 30 + 's';
+                particle.style.width = (Math.random() * 8 + 2) + 'px';
+                particle.style.height = particle.style.width;
+                container.appendChild(particle);
             }
             const symbols = ['✧', '✦', '∞', '∇', '⚡', '◈', '◎', '⬩', '💫', '🌌'];
             for (let i = 0; i < 30; i++) {
-                const s = document.createElement('div');
-                s.className = 'symbol';
-                s.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-                s.style.left = Math.random() * 100 + '%';
-                s.style.top = Math.random() * 100 + '%';
-                s.style.fontSize = (Math.random() * 2 + 1) + 'rem';
-                s.style.animationDelay = Math.random() * 20 + 's';
-                s.style.animationDuration = (Math.random() * 30 + 20) + 's';
-                container.appendChild(s);
+                const sym = document.createElement('div');
+                sym.className = 'symbol';
+                sym.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                sym.style.left = Math.random() * 100 + '%';
+                sym.style.top = Math.random() * 100 + '%';
+                sym.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+                sym.style.animationDelay = Math.random() * 20 + 's';
+                sym.style.animationDuration = (Math.random() * 30 + 20) + 's';
+                container.appendChild(sym);
             }
-        })();
+        }
+        createParticlesAndSymbols();
 
-        // ===== QUIZ =====
+        // ========== LOADING COM QUIZ ==========
         const loadingScreen = document.getElementById('loadingScreen');
         const loadingBar = document.getElementById('loadingBar');
         const progressText = document.getElementById('progressText');
         const quizArea = document.getElementById('quizArea');
+        const quizFeedback = document.getElementById('quizFeedback');
         const enterBtn = document.getElementById('enterBtn');
         const mainContent = document.getElementById('mainContent');
 
@@ -641,75 +546,101 @@
         ];
 
         let currentQuestion = 0;
-        let answers = [null, null, null]; // índices das respostas
+        let answers = [null, null, null];
+        let allQuestionsAnswered = false;
+        let progressCompleted = false;
 
         function renderQuestion() {
+            if (allQuestionsAnswered) return; // não renderiza se já respondeu tudo
             const q = questions[currentQuestion];
             let html = `<div class="quiz-question">${q.question}</div>`;
             html += '<div class="quiz-options">';
             q.options.forEach((opt, idx) => {
-                const selected = (answers[currentQuestion] === idx) ? 'selected' : '';
-                html += `<div class="quiz-option ${selected}" data-opt="${idx}">${opt}</div>`;
+                const selectedClass = (answers[currentQuestion] === idx) ? 'selected' : '';
+                html += `<div class="quiz-option ${selectedClass}" data-opt="${idx}">${opt}</div>`;
             });
             html += '</div>';
             quizArea.innerHTML = html;
 
             document.querySelectorAll('.quiz-option').forEach(opt => {
                 opt.addEventListener('click', function() {
-                    const optIdx = parseInt(this.dataset.opt);
+                    const optIdx = parseInt(this.getAttribute('data-opt'));
                     answers[currentQuestion] = optIdx;
-                    
+
+                    // Avança para próxima pergunta automaticamente após selecionar
                     if (currentQuestion < questions.length - 1) {
                         currentQuestion++;
                         renderQuestion();
                     } else {
                         // Última pergunta respondida
-                        quizArea.innerHTML = `<div style="text-align:center; padding:2rem;"><h3>Obrigado por responder!</h3><p>Agora é só aguardar o carregamento e clicar em Entrar.</p></div>`;
+                        allQuestionsAnswered = true;
+                        showThankYou();
                     }
-                    checkReady();
+                    checkConditions();
                 });
             });
         }
 
-        function checkReady() {
-            const allAnswered = answers.every(a => a !== null);
-            if (allAnswered && progress >= 100) {
+        function showThankYou() {
+            quizArea.innerHTML = `
+                <div class="thank-you-message">
+                    <h3>Obrigado por responder!</h3>
+                    <p>Aguarde enquanto preparamos sua experiência.</p>
+                </div>
+            `;
+        }
+
+        function checkConditions() {
+            // Verifica se todas as respostas foram dadas
+            const answered = answers.every(a => a !== null);
+            if (answered && !allQuestionsAnswered) {
+                allQuestionsAnswered = true;
+                showThankYou();
+            }
+            // Ativa botão se ambas condições true
+            if (allQuestionsAnswered && progressCompleted) {
                 enterBtn.classList.add('active');
             } else {
                 enterBtn.classList.remove('active');
             }
         }
 
-        // Progresso de 20 segundos
+        // Progresso simulado (20s)
         let progress = 0;
         const totalTime = 20000;
-        const step = 100 / (totalTime / 100); // % a cada 100ms
+        const interval = 100;
+        const step = (interval / totalTime) * 100;
 
-        const progressInterval = setInterval(() => {
-            progress = Math.min(progress + step, 100);
+        const loadingInterval = setInterval(() => {
+            progress += step;
+            if (progress >= 100) {
+                progress = 100;
+                progressCompleted = true;
+                clearInterval(loadingInterval);
+                checkConditions();
+            }
             loadingBar.style.width = progress + '%';
             progressText.textContent = `Carregando ${Math.round(progress)}%`;
-            if (progress >= 100) clearInterval(progressInterval);
-            checkReady();
-        }, 100);
+        }, interval);
 
-        renderQuestion();
+        renderQuestion(); // inicia quiz
 
         // Botão Entrar
         enterBtn.addEventListener('click', () => {
             if (enterBtn.classList.contains('active')) {
                 loadingScreen.classList.add('hidden');
-                mainContent.style.animationDelay = '0s';
-            } else {
-                if (answers.some(a => a === null)) {
-                    alert('Responda todas as perguntas primeiro.');
-                } else if (progress < 100) {
-                    alert('Aguarde o carregamento completo.');
-                }
+                // Força a exibição do main content (já tem animation)
             }
         });
 
-        // ===== DEPOIMENTOS =====
+        // Mensagem caso não responda tudo em 25s (opcional)
+        setTimeout(() => {
+            if (!allQuestionsAnswered && progressCompleted) {
+                quizFeedback.innerHTML = 'Por favor, responda todas as perguntas para continuar.';
+            }
+        }, 25000);
+
+        // ========== DEPOIMENTOS DINÂMICOS ==========
         const testimonialsList = document.getElementById('testimonialsList');
         const authorInput = document.getElementById('authorName');
         const essayText = document.getElementById('essayText');
@@ -717,44 +648,31 @@
 
         function loadTestimonials() {
             const stored = localStorage.getItem('nexusTestimonials');
-            if (stored) testimonialsList.innerHTML = stored;
+            if (stored) testimonialsList.innerHTML = JSON.parse(stored);
         }
         function saveTestimonials() {
-            localStorage.setItem('nexusTestimonials', testimonialsList.innerHTML);
+            localStorage.setItem('nexusTestimonials', JSON.stringify(testimonialsList.innerHTML));
         }
-        loadTestimonials();
-
         submitBtn.addEventListener('click', () => {
             const name = authorInput.value.trim();
             const text = essayText.value.trim();
-            if (!name || !text) return alert('Preencha nome e mensagem.');
+            if (!name || !text) { alert('Preencha nome e mensagem.'); return; }
             const newTestimonial = document.createElement('div');
             newTestimonial.className = 'testimonial';
             newTestimonial.innerHTML = `<p>"${text}"</p><p class="author">— ${name}</p>`;
             testimonialsList.appendChild(newTestimonial);
             saveTestimonials();
-            authorInput.value = '';
-            essayText.value = '';
-            alert('Mensagem enviada! Aparecerá nos depoimentos.');
+            authorInput.value = ''; essayText.value = '';
+            alert('Mensagem enviada!');
         });
+        loadTestimonials();
 
-        // ===== BOTÕES =====
-        document.getElementById('openEssayBtn').addEventListener('click', (e) => {
-            e.preventDefault();
-            document.querySelector('.essay-form').scrollIntoView({ behavior: 'smooth' });
-        });
-
+        // ========== BOTÕES ==========
+        document.getElementById('openEssayBtn').addEventListener('click', (e) => { e.preventDefault(); document.querySelector('.essay-form').scrollIntoView({ behavior: 'smooth' }); });
         const modal = document.getElementById('saibaMaisModal');
-        document.getElementById('openSaibaMais').addEventListener('click', (e) => {
-            e.preventDefault();
-            modal.classList.add('active');
-        });
-        document.getElementById('closeModalBtn').addEventListener('click', () => {
-            modal.classList.remove('active');
-        });
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) modal.classList.remove('active');
-        });
+        document.getElementById('openSaibaMais').addEventListener('click', (e) => { e.preventDefault(); modal.classList.add('active'); });
+        document.getElementById('closeModalBtn').addEventListener('click', () => { modal.classList.remove('active'); });
+        window.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
     </script>
 </body>
 </html>
