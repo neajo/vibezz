@@ -21,7 +21,7 @@
             --gray-700: #333333;
             --gray-500: #4d4d4d;
             --gray-300: #808080;
-            --glow: rgba(255,255,255,0.7);
+            --glow: rgba(255,255,255,0.8);
             --accent: #7ff0ff;
             --purple: #b78aff;
         }
@@ -35,7 +35,7 @@
             position: relative;
         }
 
-        /* Fundo galáctico aprimorado */
+        /* Fundo galáctico aprimorado com mais brilho e contraste */
         #particles {
             position: fixed;
             top: 0;
@@ -50,29 +50,29 @@
         .particle, .symbol, .floating-word {
             position: absolute;
             pointer-events: none;
-            opacity: 0.4;
+            opacity: 0.6;
             animation: float 30s infinite linear;
         }
 
         .particle {
-            width: 4px;
-            height: 4px;
-            background: rgba(255,255,255,0.7);
+            width: 6px;
+            height: 6px;
+            background: rgba(255,255,255,0.8);
             border-radius: 50%;
-            box-shadow: 0 0 15px var(--glow);
+            box-shadow: 0 0 20px var(--glow);
         }
 
         .symbol {
-            font-size: 1.8rem;
-            color: rgba(200,220,255,0.2);
-            text-shadow: 0 0 20px var(--accent);
+            font-size: 2rem;
+            color: rgba(220,240,255,0.3);
+            text-shadow: 0 0 30px var(--accent);
             animation: floatSymbol 35s infinite linear;
         }
 
         .floating-word {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: rgba(150,200,255,0.15);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: rgba(180,220,255,0.25);
             text-transform: uppercase;
             letter-spacing: 4px;
             white-space: nowrap;
@@ -80,21 +80,21 @@
         }
 
         @keyframes float {
-            0% { transform: translateY(120vh) translateX(0) rotate(0deg); opacity: 0.1; }
+            0% { transform: translateY(120vh) translateX(0) rotate(0deg); opacity: 0.3; }
             100% { transform: translateY(-120vh) translateX(20vw) rotate(360deg); opacity: 0; }
         }
 
         @keyframes floatSymbol {
-            0% { transform: translateY(110vh) translateX(-5vw) rotate(0deg); opacity: 0.1; }
+            0% { transform: translateY(110vh) translateX(-5vw) rotate(0deg); opacity: 0.3; }
             100% { transform: translateY(-110vh) translateX(25vw) rotate(720deg); opacity: 0; }
         }
 
         @keyframes floatWord {
-            0% { transform: translateY(100vh) translateX(-10vw) rotate(0deg); opacity: 0.05; }
+            0% { transform: translateY(100vh) translateX(-10vw) rotate(0deg); opacity: 0.2; }
             100% { transform: translateY(-100vh) translateX(30vw) rotate(10deg); opacity: 0; }
         }
 
-        /* Loading Screen inicial */
+        /* Loading Screen inicial (mantido) */
         .loading-screen {
             position: fixed;
             top: 0;
@@ -123,11 +123,11 @@
             width: 100%;
             max-height: 70vh;
             overflow-y: auto;
-            background: rgba(20,20,30,0.8);
+            background: rgba(20,20,30,0.9);
             border: 1px solid var(--gray-700);
             border-radius: 32px;
             padding: 2rem;
-            box-shadow: 0 0 80px rgba(123, 180, 255, 0.2);
+            box-shadow: 0 0 80px rgba(123, 180, 255, 0.3);
             margin-bottom: 1.5rem;
             backdrop-filter: blur(5px);
         }
@@ -442,7 +442,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.95);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
             z-index: 3000;
             justify-content: center;
             align-items: center;
@@ -450,14 +450,14 @@
         }
         .modal-quiz.active { display: flex; }
         .modal-quiz-content {
-            background: var(--gray-900);
-            max-width: 600px;
+            background: rgba(20,20,30,0.95);
+            max-width: 650px;
             width: 100%;
             padding: 2.5rem;
             border-radius: 32px;
             border: 1px solid var(--white);
-            box-shadow: 0 0 60px var(--accent);
-            max-height: 80vh;
+            box-shadow: 0 0 80px var(--accent);
+            max-height: 85vh;
             overflow-y: auto;
         }
         .modal-quiz-content h2 {
@@ -610,7 +610,7 @@
         <footer>© 2026 Nexus IA — Todos os direitos reservados.</footer>
     </div>
 
-    <!-- Modal "Quero fazer parte" com quiz -->
+    <!-- Modal "Quero fazer parte" com quiz de 5 perguntas -->
     <div class="modal-quiz" id="quizModal">
         <div class="modal-quiz-content">
             <button class="close-quiz" id="closeQuizModal">&times;</button>
@@ -642,41 +642,41 @@
         // ========== FUNDO GALÁCTICO APRIMORADO ==========
         function createGalaxy() {
             const container = document.getElementById('particles');
-            // Partículas
-            for (let i = 0; i < 120; i++) {
+            // Partículas (mais numerosas e brilhantes)
+            for (let i = 0; i < 200; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 particle.style.left = Math.random() * 100 + '%';
                 particle.style.animationDelay = Math.random() * 40 + 's';
-                particle.style.width = (Math.random() * 10 + 2) + 'px';
+                particle.style.width = (Math.random() * 12 + 3) + 'px';
                 particle.style.height = particle.style.width;
                 container.appendChild(particle);
             }
-            // Símbolos
-            const symbols = ['✧', '✦', '∞', '∇', '⚡', '◈', '◎', '⬩', '💫', '🌌', '🧠', '🔮', '🌠'];
-            for (let i = 0; i < 60; i++) {
+            // Símbolos (mais variados)
+            const symbols = ['✧', '✦', '∞', '∇', '⚡', '◈', '◎', '⬩', '💫', '🌌', '🧠', '🔮', '🌠', '✨', '🌟'];
+            for (let i = 0; i < 100; i++) {
                 const sym = document.createElement('div');
                 sym.className = 'symbol';
                 sym.textContent = symbols[Math.floor(Math.random() * symbols.length)];
                 sym.style.left = Math.random() * 100 + '%';
                 sym.style.top = Math.random() * 100 + '%';
-                sym.style.fontSize = (Math.random() * 2.5 + 1) + 'rem';
+                sym.style.fontSize = (Math.random() * 3 + 1.5) + 'rem';
                 sym.style.animationDelay = Math.random() * 30 + 's';
                 sym.style.animationDuration = (Math.random() * 40 + 30) + 's';
                 container.appendChild(sym);
             }
-            // Palavras flutuantes
-            const words = ['NEXUS IA', 'CONEXÃO', 'FUTURO', 'TALENTO', 'IA ÉTICA', 'REDE NEURAL', 'CRIATIVIDADE', 'OPORTUNIDADE', 'EVOLUÇÃO', 'INFINITO'];
-            for (let i = 0; i < 40; i++) {
+            // Palavras flutuantes (mais frequentes)
+            const words = ['NEXUS IA', 'CONEXÃO', 'FUTURO', 'TALENTO', 'IA ÉTICA', 'REDE NEURAL', 'CRIATIVIDADE', 'OPORTUNIDADE', 'EVOLUÇÃO', 'INFINITO', 'INOVAÇÃO', 'INTELIGÊNCIA', 'ARTE', 'MÚSICA', 'DESIGN'];
+            for (let i = 0; i < 80; i++) {
                 const word = document.createElement('div');
                 word.className = 'floating-word';
                 word.textContent = words[Math.floor(Math.random() * words.length)];
                 word.style.left = Math.random() * 100 + '%';
                 word.style.top = Math.random() * 100 + '%';
-                word.style.fontSize = (Math.random() * 1.8 + 1) + 'rem';
+                word.style.fontSize = (Math.random() * 2 + 1.2) + 'rem';
                 word.style.animationDelay = Math.random() * 20 + 's';
                 word.style.animationDuration = (Math.random() * 50 + 30) + 's';
-                word.style.opacity = 0.1;
+                word.style.opacity = 0.25;
                 container.appendChild(word);
             }
         }
@@ -760,7 +760,7 @@
             }
         });
 
-        // ========== MODAL QUIZ "QUERO FAZER PARTE" ==========
+        // ========== MODAL QUIZ "QUERO FAZER PARTE" (5 PERGUNTAS) ==========
         const quizModal = document.getElementById('quizModal');
         const openQuizBtn = document.getElementById('openQuizModalBtn');
         const closeQuizBtn = document.getElementById('closeQuizModal');
@@ -773,11 +773,13 @@
         const modalQuestions = [
             { question: "Você tem um projeto artístico ou criativo?", options: ["Sim, profissional", "Sim, amador", "Não, mas quero começar", "Apenas curiosidade"] },
             { question: "Qual seu principal objetivo?", options: ["Ganhar dinheiro", "Ganhar visibilidade", "Fazer networking", "Aprender", "Me divertir"] },
-            { question: "Você já usou IA para criar ou melhorar seu trabalho?", options: ["Sim, frequentemente", "Sim, algumas vezes", "Nunca, mas quero", "Não tenho interesse"] }
+            { question: "Você já usou IA para criar ou melhorar seu trabalho?", options: ["Sim, frequentemente", "Sim, algumas vezes", "Nunca, mas quero", "Não tenho interesse"] },
+            { question: "Quanto tempo por semana você dedica ao seu talento?", options: ["Menos de 2h", "2-5h", "5-10h", "Mais de 10h"] },
+            { question: "Você estaria disposto a pagar por ferramentas que impulsionem sua carreira?", options: ["Sim, com certeza", "Talvez, dependendo do valor", "Não, apenas gratuito"] }
         ];
 
         let modalCurrent = 0;
-        let modalAnswers = [null, null, null];
+        let modalAnswers = [null, null, null, null, null];
         let modalCompleted = false;
 
         function renderModalQuestion() {
@@ -813,7 +815,7 @@
             e.preventDefault();
             quizModal.classList.add('active');
             modalCurrent = 0;
-            modalAnswers = [null, null, null];
+            modalAnswers = [null, null, null, null, null];
             modalCompleted = false;
             quizModalArea.style.display = 'block';
             quizModalResult.style.display = 'none';
