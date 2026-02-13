@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* (mantive o CSS anterior, apenas ajustes no loading) */
         * {
             margin: 0;
             padding: 0;
@@ -36,7 +35,7 @@
             position: relative;
         }
 
-        /* Fundo galáctico (mantido) */
+        /* Fundo galáctico aprimorado */
         #particles {
             position: fixed;
             top: 0;
@@ -48,40 +47,54 @@
             overflow: hidden;
         }
 
-        .particle, .symbol {
+        .particle, .symbol, .floating-word {
             position: absolute;
             pointer-events: none;
-            opacity: 0.5;
-            animation: float 25s infinite linear;
+            opacity: 0.4;
+            animation: float 30s infinite linear;
         }
 
         .particle {
             width: 4px;
             height: 4px;
-            background: rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.7);
             border-radius: 50%;
-            box-shadow: 0 0 12px var(--glow);
+            box-shadow: 0 0 15px var(--glow);
         }
 
         .symbol {
-            font-size: 1.5rem;
-            color: rgba(200,200,255,0.2);
-            font-weight: 300;
-            text-shadow: 0 0 15px var(--accent);
-            animation: floatSymbol 30s infinite linear;
+            font-size: 1.8rem;
+            color: rgba(200,220,255,0.2);
+            text-shadow: 0 0 20px var(--accent);
+            animation: floatSymbol 35s infinite linear;
+        }
+
+        .floating-word {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: rgba(150,200,255,0.15);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            white-space: nowrap;
+            animation: floatWord 40s infinite linear;
         }
 
         @keyframes float {
-            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0.2; }
-            100% { transform: translateY(-100vh) translateX(20vw) rotate(360deg); opacity: 0; }
+            0% { transform: translateY(120vh) translateX(0) rotate(0deg); opacity: 0.1; }
+            100% { transform: translateY(-120vh) translateX(20vw) rotate(360deg); opacity: 0; }
         }
 
         @keyframes floatSymbol {
-            0% { transform: translateY(120vh) translateX(-10vw) rotate(0deg); opacity: 0.1; }
-            100% { transform: translateY(-120vh) translateX(30vw) rotate(720deg); opacity: 0; }
+            0% { transform: translateY(110vh) translateX(-5vw) rotate(0deg); opacity: 0.1; }
+            100% { transform: translateY(-110vh) translateX(25vw) rotate(720deg); opacity: 0; }
         }
 
-        /* Loading Screen aprimorado com quiz */
+        @keyframes floatWord {
+            0% { transform: translateY(100vh) translateX(-10vw) rotate(0deg); opacity: 0.05; }
+            100% { transform: translateY(-100vh) translateX(30vw) rotate(10deg); opacity: 0; }
+        }
+
+        /* Loading Screen inicial */
         .loading-screen {
             position: fixed;
             top: 0;
@@ -97,7 +110,7 @@
             z-index: 2000;
             transition: opacity 1s ease;
             padding: 2rem;
-            overflow-y: auto; /* permite rolagem se conteúdo for maior */
+            overflow-y: auto;
         }
 
         .loading-screen.hidden {
@@ -108,8 +121,8 @@
         .quiz-container {
             max-width: 700px;
             width: 100%;
-            max-height: 70vh; /* limita altura */
-            overflow-y: auto; /* rolagem interna */
+            max-height: 70vh;
+            overflow-y: auto;
             background: rgba(20,20,30,0.8);
             border: 1px solid var(--gray-700);
             border-radius: 32px;
@@ -227,7 +240,7 @@
             margin-bottom: 1rem;
         }
 
-        /* Restante do CSS (main-content, navbar, etc) continua igual */
+        /* Conteúdo principal */
         .main-content {
             position: relative;
             z-index: 10;
@@ -375,6 +388,7 @@
             font-style: normal;
             font-weight: 500;
         }
+        /* Formulário de redação (depoimentos) */
         .essay-form {
             background: rgba(20,20,30,0.8);
             border-radius: 24px;
@@ -419,6 +433,84 @@
             color: var(--white);
             border: 1px solid var(--white);
         }
+        /* Modal do quiz "Quero fazer parte" */
+        .modal-quiz {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+        .modal-quiz.active { display: flex; }
+        .modal-quiz-content {
+            background: var(--gray-900);
+            max-width: 600px;
+            width: 100%;
+            padding: 2.5rem;
+            border-radius: 32px;
+            border: 1px solid var(--white);
+            box-shadow: 0 0 60px var(--accent);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .modal-quiz-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff, #aac0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .modal-quiz-content .close-quiz {
+            float: right;
+            background: none;
+            border: none;
+            color: var(--gray-500);
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        .modal-quiz-content .close-quiz:hover { color: var(--white); }
+        .modal-quiz .quiz-option { background: rgba(255,255,255,0.05); }
+        .final-btn {
+            background: var(--white);
+            color: var(--black);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-top: 2rem;
+            width: 100%;
+            transition: 0.3s;
+        }
+        .final-btn:hover {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+        .hidden { display: none; }
+        .loading-animation {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--gray-700);
+            border-top-color: var(--white);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        /* Modal Saiba mais */
         .modal {
             display: none;
             position: fixed;
@@ -468,9 +560,9 @@
 <body>
     <div id="particles"></div>
 
-    <!-- Loading Screen -->
+    <!-- Loading Screen inicial -->
     <div class="loading-screen" id="loadingScreen">
-        <div class="quiz-container" id="quizContainer">
+        <div class="quiz-container">
             <h2>Bem-vindo ao Nexus IA</h2>
             <p>Responda às perguntas para desbloquear o acesso à plataforma.</p>
             <div id="quizArea"></div>
@@ -483,54 +575,114 @@
         <button class="enter-btn" id="enterBtn">Entrar no Nexus</button>
     </div>
 
-    <!-- Conteúdo Principal (idêntico ao anterior) -->
+    <!-- Conteúdo Principal -->
     <div class="main-content" id="mainContent">
         <nav class="navbar"><div class="logo">✦ NEXUS IA ✦</div></nav>
         <div class="container">
-            <!-- Hero, cards, testimonials, formulário, etc -->
             <section class="hero"><h1>Nexus IA</h1><p class="sub">A inteligência que conecta talentos ao mundo</p></section>
+            
             <section><h2 class="section-title">Por que Nexus IA?</h2><div class="cards-grid"><div class="card"><h3>🧠 Aprendizado Profundo</h3><p>Nossa IA estuda seu comportamento e oferece conexões genuínas.</p></div><div class="card"><h3>🚀 Descoberta de Talentos</h3><p>Artistas e criadores são identificados e apresentados a oportunidades.</p></div><div class="card"><h3>🔒 Privacidade Primeiro</h3><p>Seus dados pertencem a você. Criptografia de ponta a ponta.</p></div><div class="card"><h3>🌍 Rede Global</h3><p>Conecte-se com pessoas e marcas do mundo todo.</p></div></div></section>
+            
             <section><h2 class="section-title">Como a IA Transforma sua Experiência</h2><div class="cards-grid"><div class="card"><h3>📊 Análise Preditiva</h3><p>Antecipamos tendências e mostramos seu potencial.</p></div><div class="card"><h3>🎯 Match Inteligente</h3><p>Encontramos colaboradores e mentores ideais.</p></div><div class="card"><h3>💡 Insights Criativos</h3><p>Sugestões baseadas em dados do mercado.</p></div><div class="card"><h3>⚡ Monetização Automática</h3><p>Oportunidades de patrocínio e venda.</p></div></div></section>
+            
             <h2 class="section-title">O que dizem nossos usuários</h2>
-            <div class="testimonials" id="testimonialsList"><div class="testimonial"><p>"O Nexus IA me conectou com um produtor musical dos EUA."</p><p class="author">— Ana Clara, cantora</p></div><div class="testimonial"><p>"Como designer, recebi propostas de empresas que nunca imaginaria."</p><p class="author">— Marcos Silva, designer</p></div><div class="testimonial"><p>"Plataforma revolucionária. Finalmente uma rede que valoriza o talento real."</p><p class="author">— Juliana Mendes, fotógrafa</p></div></div>
-            <div class="essay-form"><h3>Quero fazer parte</h3><p>Conte-nos sobre seu talento. Sua mensagem poderá aparecer nos depoimentos.</p><input type="text" id="authorName" placeholder="Seu nome (ou pseudônimo)"><textarea id="essayText" placeholder="Escreva aqui sua mensagem..."></textarea><button id="submitEssay">Enviar mensagem</button></div>
-            <div class="btn-group"><a href="#" class="btn" id="openEssayBtn">📝 Quero fazer parte</a><a href="#" class="btn" id="openSaibaMais">🔍 Saiba mais</a></div>
+            <div class="testimonials" id="testimonialsList">
+                <div class="testimonial"><p>"O Nexus IA me conectou com um produtor musical dos EUA."</p><p class="author">— Ana Clara, cantora</p></div>
+                <div class="testimonial"><p>"Como designer, recebi propostas de empresas que nunca imaginaria."</p><p class="author">— Marcos Silva, designer</p></div>
+                <div class="testimonial"><p>"Plataforma revolucionária. Finalmente uma rede que valoriza o talento real."</p><p class="author">— Juliana Mendes, fotógrafa</p></div>
+            </div>
+
+            <!-- Formulário de redação para novos depoimentos -->
+            <div class="essay-form">
+                <h3>Compartilhe sua experiência</h3>
+                <p>Conte-nos sobre seu talento ou o que você espera do Nexus IA. Sua mensagem poderá aparecer nos depoimentos.</p>
+                <input type="text" id="authorName" placeholder="Seu nome (ou pseudônimo)">
+                <textarea id="essayText" placeholder="Escreva aqui sua mensagem..."></textarea>
+                <button id="submitEssay">Enviar mensagem</button>
+            </div>
+            
+            <!-- Botões principais -->
+            <div class="btn-group">
+                <a href="#" class="btn" id="openQuizModalBtn">📝 Quero fazer parte</a>
+                <a href="#" class="btn" id="openSaibaMais">🔍 Saiba mais</a>
+            </div>
         </div>
         <footer>© 2026 Nexus IA — Todos os direitos reservados.</footer>
     </div>
 
+    <!-- Modal "Quero fazer parte" com quiz -->
+    <div class="modal-quiz" id="quizModal">
+        <div class="modal-quiz-content">
+            <button class="close-quiz" id="closeQuizModal">&times;</button>
+            <h2>Descubra se você está pronto</h2>
+            <p>Responda algumas perguntas para saber se o Nexus IA é para você.</p>
+            <div id="quizModalArea"></div>
+            <div id="quizModalFeedback"></div>
+            <div id="quizModalResult" style="display: none; text-align: center;">
+                <div class="loading-animation" id="loadingAnimation" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Preparando sua entrada...</p>
+                </div>
+                <button class="final-btn" id="goToDetailsBtn" style="display: none;">🚀 Entrar no Nexus</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal Saiba mais -->
-    <div class="modal" id="saibaMaisModal"><div class="modal-content"><h2>🚀 Sobre o Nexus IA</h2><p>O Nexus IA é uma plataforma de IA para conectar talentos a oportunidades. Em breve: ferramentas exclusivas de monetização e curadoria.</p><button class="close-modal" id="closeModalBtn">Fechar</button></div></div>
+    <div class="modal" id="saibaMaisModal">
+        <div class="modal-content">
+            <h2>🚀 Sobre o Nexus IA</h2>
+            <p>O Nexus IA é uma plataforma de inteligência artificial desenvolvida para conectar talentos emergentes a oportunidades reais. Utilizamos redes neurais avançadas para analisar perfis, comportamentos e tendências, criando matches precisos entre artistas, criadores, empresas e marcas.</p>
+            <p><strong>Em breve:</strong> Lançaremos ferramentas exclusivas de monetização, portfólio inteligente e curadoria automática de conteúdo. Fique atento!</p>
+            <button class="close-modal" id="closeModalBtn">Fechar</button>
+        </div>
+    </div>
 
     <script>
-        // ========== FUNDO GALÁCTICO (igual) ==========
-        function createParticlesAndSymbols() {
+        // ========== FUNDO GALÁCTICO APRIMORADO ==========
+        function createGalaxy() {
             const container = document.getElementById('particles');
-            for (let i = 0; i < 60; i++) {
+            // Partículas
+            for (let i = 0; i < 120; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 30 + 's';
-                particle.style.width = (Math.random() * 8 + 2) + 'px';
+                particle.style.animationDelay = Math.random() * 40 + 's';
+                particle.style.width = (Math.random() * 10 + 2) + 'px';
                 particle.style.height = particle.style.width;
                 container.appendChild(particle);
             }
-            const symbols = ['✧', '✦', '∞', '∇', '⚡', '◈', '◎', '⬩', '💫', '🌌'];
-            for (let i = 0; i < 30; i++) {
+            // Símbolos
+            const symbols = ['✧', '✦', '∞', '∇', '⚡', '◈', '◎', '⬩', '💫', '🌌', '🧠', '🔮', '🌠'];
+            for (let i = 0; i < 60; i++) {
                 const sym = document.createElement('div');
                 sym.className = 'symbol';
                 sym.textContent = symbols[Math.floor(Math.random() * symbols.length)];
                 sym.style.left = Math.random() * 100 + '%';
                 sym.style.top = Math.random() * 100 + '%';
-                sym.style.fontSize = (Math.random() * 2 + 1) + 'rem';
-                sym.style.animationDelay = Math.random() * 20 + 's';
-                sym.style.animationDuration = (Math.random() * 30 + 20) + 's';
+                sym.style.fontSize = (Math.random() * 2.5 + 1) + 'rem';
+                sym.style.animationDelay = Math.random() * 30 + 's';
+                sym.style.animationDuration = (Math.random() * 40 + 30) + 's';
                 container.appendChild(sym);
             }
+            // Palavras flutuantes
+            const words = ['NEXUS IA', 'CONEXÃO', 'FUTURO', 'TALENTO', 'IA ÉTICA', 'REDE NEURAL', 'CRIATIVIDADE', 'OPORTUNIDADE', 'EVOLUÇÃO', 'INFINITO'];
+            for (let i = 0; i < 40; i++) {
+                const word = document.createElement('div');
+                word.className = 'floating-word';
+                word.textContent = words[Math.floor(Math.random() * words.length)];
+                word.style.left = Math.random() * 100 + '%';
+                word.style.top = Math.random() * 100 + '%';
+                word.style.fontSize = (Math.random() * 1.8 + 1) + 'rem';
+                word.style.animationDelay = Math.random() * 20 + 's';
+                word.style.animationDuration = (Math.random() * 50 + 30) + 's';
+                word.style.opacity = 0.1;
+                container.appendChild(word);
+            }
         }
-        createParticlesAndSymbols();
+        createGalaxy();
 
-        // ========== LOADING COM QUIZ ==========
+        // ========== LOADING INICIAL (quiz e progresso) ==========
         const loadingScreen = document.getElementById('loadingScreen');
         const loadingBar = document.getElementById('loadingBar');
         const progressText = document.getElementById('progressText');
@@ -539,69 +691,47 @@
         const enterBtn = document.getElementById('enterBtn');
         const mainContent = document.getElementById('mainContent');
 
-        const questions = [
+        const initialQuestions = [
             { question: "Qual área melhor descreve seu talento?", options: ["Música", "Artes Visuais", "Escrita", "Tecnologia", "Outro"] },
             { question: "Você já tentou monetizar seu trabalho online?", options: ["Sim, com sucesso", "Sim, mas sem resultados", "Nunca tentei", "Estou começando"] },
             { question: "O que você mais busca em uma rede social?", options: ["Visibilidade", "Networking profissional", "Comunidade", "Monetização", "Aprendizado"] }
         ];
 
-        let currentQuestion = 0;
-        let answers = [null, null, null];
-        let allQuestionsAnswered = false;
+        let currentInitQuestion = 0;
+        let initAnswers = [null, null, null];
+        let allInitAnswered = false;
         let progressCompleted = false;
 
-        function renderQuestion() {
-            if (allQuestionsAnswered) return; // não renderiza se já respondeu tudo
-            const q = questions[currentQuestion];
-            let html = `<div class="quiz-question">${q.question}</div>`;
-            html += '<div class="quiz-options">';
+        function renderInitQuestion() {
+            if (allInitAnswered) return;
+            const q = initialQuestions[currentInitQuestion];
+            let html = `<div class="quiz-question">${q.question}</div><div class="quiz-options">`;
             q.options.forEach((opt, idx) => {
-                const selectedClass = (answers[currentQuestion] === idx) ? 'selected' : '';
-                html += `<div class="quiz-option ${selectedClass}" data-opt="${idx}">${opt}</div>`;
+                const selected = (initAnswers[currentInitQuestion] === idx) ? 'selected' : '';
+                html += `<div class="quiz-option ${selected}" data-opt="${idx}">${opt}</div>`;
             });
             html += '</div>';
             quizArea.innerHTML = html;
 
-            document.querySelectorAll('.quiz-option').forEach(opt => {
+            document.querySelectorAll('#quizArea .quiz-option').forEach(opt => {
                 opt.addEventListener('click', function() {
-                    const optIdx = parseInt(this.getAttribute('data-opt'));
-                    answers[currentQuestion] = optIdx;
-
-                    // Avança para próxima pergunta automaticamente após selecionar
-                    if (currentQuestion < questions.length - 1) {
-                        currentQuestion++;
-                        renderQuestion();
+                    const idx = parseInt(this.getAttribute('data-opt'));
+                    initAnswers[currentInitQuestion] = idx;
+                    if (currentInitQuestion < initialQuestions.length - 1) {
+                        currentInitQuestion++;
+                        renderInitQuestion();
                     } else {
-                        // Última pergunta respondida
-                        allQuestionsAnswered = true;
-                        showThankYou();
+                        allInitAnswered = true;
+                        quizArea.innerHTML = '<div class="thank-you-message"><h3>Obrigado!</h3><p>Aguarde...</p></div>';
                     }
-                    checkConditions();
+                    checkInitConditions();
                 });
             });
         }
 
-        function showThankYou() {
-            quizArea.innerHTML = `
-                <div class="thank-you-message">
-                    <h3>Obrigado por responder!</h3>
-                    <p>Aguarde enquanto preparamos sua experiência.</p>
-                </div>
-            `;
-        }
-
-        function checkConditions() {
-            // Verifica se todas as respostas foram dadas
-            const answered = answers.every(a => a !== null);
-            if (answered && !allQuestionsAnswered) {
-                allQuestionsAnswered = true;
-                showThankYou();
-            }
-            // Ativa botão se ambas condições true
-            if (allQuestionsAnswered && progressCompleted) {
+        function checkInitConditions() {
+            if (allInitAnswered && progressCompleted) {
                 enterBtn.classList.add('active');
-            } else {
-                enterBtn.classList.remove('active');
             }
         }
 
@@ -610,35 +740,97 @@
         const totalTime = 20000;
         const interval = 100;
         const step = (interval / totalTime) * 100;
-
         const loadingInterval = setInterval(() => {
             progress += step;
             if (progress >= 100) {
                 progress = 100;
                 progressCompleted = true;
                 clearInterval(loadingInterval);
-                checkConditions();
+                checkInitConditions();
             }
             loadingBar.style.width = progress + '%';
             progressText.textContent = `Carregando ${Math.round(progress)}%`;
         }, interval);
 
-        renderQuestion(); // inicia quiz
+        renderInitQuestion();
 
-        // Botão Entrar
         enterBtn.addEventListener('click', () => {
             if (enterBtn.classList.contains('active')) {
                 loadingScreen.classList.add('hidden');
-                // Força a exibição do main content (já tem animation)
             }
         });
 
-        // Mensagem caso não responda tudo em 25s (opcional)
-        setTimeout(() => {
-            if (!allQuestionsAnswered && progressCompleted) {
-                quizFeedback.innerHTML = 'Por favor, responda todas as perguntas para continuar.';
-            }
-        }, 25000);
+        // ========== MODAL QUIZ "QUERO FAZER PARTE" ==========
+        const quizModal = document.getElementById('quizModal');
+        const openQuizBtn = document.getElementById('openQuizModalBtn');
+        const closeQuizBtn = document.getElementById('closeQuizModal');
+        const quizModalArea = document.getElementById('quizModalArea');
+        const quizModalFeedback = document.getElementById('quizModalFeedback');
+        const quizModalResult = document.getElementById('quizModalResult');
+        const loadingAnimation = document.getElementById('loadingAnimation');
+        const goToDetailsBtn = document.getElementById('goToDetailsBtn');
+
+        const modalQuestions = [
+            { question: "Você tem um projeto artístico ou criativo?", options: ["Sim, profissional", "Sim, amador", "Não, mas quero começar", "Apenas curiosidade"] },
+            { question: "Qual seu principal objetivo?", options: ["Ganhar dinheiro", "Ganhar visibilidade", "Fazer networking", "Aprender", "Me divertir"] },
+            { question: "Você já usou IA para criar ou melhorar seu trabalho?", options: ["Sim, frequentemente", "Sim, algumas vezes", "Nunca, mas quero", "Não tenho interesse"] }
+        ];
+
+        let modalCurrent = 0;
+        let modalAnswers = [null, null, null];
+        let modalCompleted = false;
+
+        function renderModalQuestion() {
+            if (modalCompleted) return;
+            const q = modalQuestions[modalCurrent];
+            let html = `<div class="quiz-question">${q.question}</div><div class="quiz-options">`;
+            q.options.forEach((opt, idx) => {
+                const selected = (modalAnswers[modalCurrent] === idx) ? 'selected' : '';
+                html += `<div class="quiz-option ${selected}" data-opt="${idx}">${opt}</div>`;
+            });
+            html += '</div>';
+            quizModalArea.innerHTML = html;
+
+            document.querySelectorAll('#quizModalArea .quiz-option').forEach(opt => {
+                opt.addEventListener('click', function() {
+                    const idx = parseInt(this.getAttribute('data-opt'));
+                    modalAnswers[modalCurrent] = idx;
+                    if (modalCurrent < modalQuestions.length - 1) {
+                        modalCurrent++;
+                        renderModalQuestion();
+                    } else {
+                        modalCompleted = true;
+                        quizModalArea.style.display = 'none';
+                        quizModalFeedback.style.display = 'none';
+                        quizModalResult.style.display = 'block';
+                        goToDetailsBtn.style.display = 'inline-block';
+                    }
+                });
+            });
+        }
+
+        openQuizBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            quizModal.classList.add('active');
+            modalCurrent = 0;
+            modalAnswers = [null, null, null];
+            modalCompleted = false;
+            quizModalArea.style.display = 'block';
+            quizModalResult.style.display = 'none';
+            renderModalQuestion();
+        });
+
+        closeQuizBtn.addEventListener('click', () => {
+            quizModal.classList.remove('active');
+        });
+
+        goToDetailsBtn.addEventListener('click', () => {
+            goToDetailsBtn.style.display = 'none';
+            loadingAnimation.style.display = 'block';
+            setTimeout(() => {
+                window.location.href = 'detalhes.html';
+            }, 2000);
+        });
 
         // ========== DEPOIMENTOS DINÂMICOS ==========
         const testimonialsList = document.getElementById('testimonialsList');
@@ -667,12 +859,18 @@
         });
         loadTestimonials();
 
-        // ========== BOTÕES ==========
-        document.getElementById('openEssayBtn').addEventListener('click', (e) => { e.preventDefault(); document.querySelector('.essay-form').scrollIntoView({ behavior: 'smooth' }); });
-        const modal = document.getElementById('saibaMaisModal');
-        document.getElementById('openSaibaMais').addEventListener('click', (e) => { e.preventDefault(); modal.classList.add('active'); });
-        document.getElementById('closeModalBtn').addEventListener('click', () => { modal.classList.remove('active'); });
-        window.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+        // ========== MODAL SAIBA MAIS ==========
+        const modalSaiba = document.getElementById('saibaMaisModal');
+        document.getElementById('openSaibaMais').addEventListener('click', (e) => {
+            e.preventDefault();
+            modalSaiba.classList.add('active');
+        });
+        document.getElementById('closeModalBtn').addEventListener('click', () => {
+            modalSaiba.classList.remove('active');
+        });
+        window.addEventListener('click', (e) => {
+            if (e.target === modalSaiba) modalSaiba.classList.remove('active');
+        });
     </script>
 </body>
 </html>
