@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEAJ Nexus Labs - Cadastro</title>
+    <meta name="description" content="Junte-se ao futuro da IA com a Nexus e a rede social neural Vibezz.">
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========== VARIÁVEIS ========== */
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --gray-900: #1a1a1a;
+            --gray-700: #333333;
+            --gray-500: #4d4d4d;
+            --gray-300: #808080;
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* ========== RESET ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Fundo com partículas simuladas via gradiente animado */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.03) 0%, transparent 20%),
+                        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.03) 0%, transparent 20%),
+                        repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 10px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ========== LOADING INICIAL ========== */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--black);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeOut 1s ease-in-out 4s forwards;
+            pointer-events: none;
+        }
+
+        .splash-logo {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            animation: scaleIn 1.5s ease-out;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        .typing-text {
+            font-size: 1.5rem;
+            font-weight: 300;
+            border-right: 2px solid var(--white);
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: typing 3s steps(30, end) forwards, blink 0.75s step-end infinite;
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 2px;
+            background: var(--gray-700);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0;
+            background: var(--white);
+            animation: progressLoad 3.5s ease-in-out forwards;
+        }
+
+        @keyframes fadeOut {
+            to { opacity: 0; visibility: hidden; }
+        }
+
+        @keyframes scaleIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--white); }
+        }
+
+        @keyframes progressLoad {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        /* ========== CONTEÚDO PRINCIPAL ========== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeInContent 1s ease-in 4.5s forwards;
+        }
+
+        @keyframes fadeInContent {
+            to { opacity: 1; }
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff, #aaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--gray-300);
+            max-width: 600px;
+            margin: 0 auto;
+            animation: slideUp 0.8s ease-out 0.1s both;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* ========== FORMULÁRIO ========== */
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(26, 26, 26, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2.5rem;
+            border: 1px solid var(--gray-700);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--gray-300);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: var(--gray-900);
+            border: 1px solid var(--gray-700);
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--white);
+            box-shadow: 0 0 0 2px rgba(255,255,255,0.1);
+        }
+
+        .form-group .validation-icon {
+            position: absolute;
+            right: 1rem;
+            top: 2.5rem;
+            font-size: 1.2rem;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .form-group.valid .validation-icon {
+            opacity: 1;
+            color: #4caf50;
+        }
+
+        .form-group.invalid .validation-icon {
+            opacity: 1;
+            color: #f44336;
+        }
+
+        .error-message {
+            font-size: 0.85rem;
+            color: #f44336;
+            margin-top: 0.3rem;
+            min-height: 1.2rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .checkbox-group input {
+            width: auto;
+            accent-color: var(--white);
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            color: var(--gray-300);
+        }
+
+        .checkbox-group a {
+            color: var(--white);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--white);
+        }
+
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 1rem;
+            background: transparent;
+            border: 1px solid var(--white);
+            color: var(--white);
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            background: var(--white);
+            color: var(--black);
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        /* ========== MODAL ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--gray-900);
+            max-width: 500px;
+            width: 90%;
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--gray-700);
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: modalIn 0.3s ease-out;
+        }
+
+        @keyframes modalIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-content h2 {
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .modal-content p {
+            color: var(--gray-300);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .close-modal {
+            background: none;
+            border: 1px solid var(--gray-700);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        /* ========== ANIMAÇÃO DE SUCESSO ========== */
+        .success-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--black);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            flex-direction: column;
+        }
+
+        .success-overlay.active {
+            display: flex;
+        }
+
+        .checkmark {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px solid var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            animation: checkmarkPop 0.5s ease-out;
+        }
+
+        @keyframes checkmarkPop {
+            0% { transform: scale(0); }
+            80% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* ========== RESPONSIVIDADE ========== */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .container { padding: 1rem; }
+            .form-container { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Splash Screen (loading inicial) -->
+    <div class="splash-screen">
+        <div class="splash-logo">NEAJ NEXUS LABS</div>
+        <div class="typing-text">Bem-vindo ao futuro da IA</div>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <div class="particles"></div>
+    </div>
+
+    <!-- Conteúdo principal -->
+    <div class="container">
+        <div class="hero">
+            <h1>Entre para o amanhã</h1>
+            <p>Crie sua conta e descubra a inteligência artificial que pensa como você.</p>
+        </div>
+
+        <div class="form-container">
+            <form id="registerForm">
+                <div class="form-group" id="group-name">
+                    <label for="name">Nome completo</label>
+                    <input type="text" id="name" placeholder="Seu nome" required>
+                    <span class="validation-icon">✓</span>
+                    <div class="error-message"></div>
+                </div>
+                <div class="form-group" id="group-email">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" placeholder="seu@email.com" required>
+                    <span class="validation-icon">✓</span>
+                    <div class="error-message"></div>
+                </div>
+                <div class="form-group" id="group-password">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" placeholder="Mínimo 6 caracteres" required>
+                    <span class="validation-icon">✓</span>
+                    <div class="error-message"></div>
+                </div>
+                <div class="form-group" id="group-confirm">
+                    <label for="confirm">Confirmar senha</label>
+                    <input type="password" id="confirm" placeholder="Digite novamente" required>
+                    <span class="validation-icon">✓</span>
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">Eu aceito os <a href="#" id="showTerms">Termos de Uso</a> e <a href="#" id="showPrivacy">Política de Privacidade</a></label>
+                </div>
+
+                <button type="submit" class="btn" id="submitBtn">Criar Conta</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Termos -->
+    <div class="modal" id="termsModal">
+        <div class="modal-content">
+            <h2>Termos de Uso</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <button class="close-modal">Fechar</button>
+        </div>
+    </div>
+
+    <div class="modal" id="privacyModal">
+        <div class="modal-content">
+            <h2>Política de Privacidade</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <button class="close-modal">Fechar</button>
+        </div>
+    </div>
+
+    <!-- Overlay de sucesso -->
+    <div class="success-overlay" id="successOverlay">
+        <div class="checkmark">✓</div>
+        <h2>Conta criada com sucesso!</h2>
+        <p>Redirecionando para a próxima etapa...</p>
+    </div>
+
+    <script>
+        // ========== VALIDAÇÃO DE FORMULÁRIO EM TEMPO REAL ==========
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const confirmInput = document.getElementById('confirm');
+        const termsCheck = document.getElementById('terms');
+        const form = document.getElementById('registerForm');
+        const submitBtn = document.getElementById('submitBtn');
+
+        const groups = {
+            name: document.getElementById('group-name'),
+            email: document.getElementById('group-email'),
+            password: document.getElementById('group-password'),
+            confirm: document.getElementById('group-confirm')
+        };
+
+        function validateName() {
+            const value = nameInput.value.trim();
+            const isValid = value.length >= 3;
+            setFieldStatus('name', isValid, isValid ? '' : 'Nome deve ter pelo menos 3 caracteres');
+            return isValid;
+        }
+
+        function validateEmail() {
+            const value = emailInput.value.trim();
+            const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+            setFieldStatus('email', isValid, isValid ? '' : 'E-mail inválido');
+            return isValid;
+        }
+
+        function validatePassword() {
+            const value = passwordInput.value;
+            const isValid = value.length >= 6;
+            setFieldStatus('password', isValid, isValid ? '' : 'Senha deve ter no mínimo 6 caracteres');
+            if (confirmInput.value) validateConfirm();
+            return isValid;
+        }
+
+        function validateConfirm() {
+            const isValid = confirmInput.value === passwordInput.value && passwordInput.value.length >= 6;
+            setFieldStatus('confirm', isValid, isValid ? '' : 'As senhas não coincidem');
+            return isValid;
+        }
+
+        function setFieldStatus(field, isValid, errorMsg) {
+            const group = groups[field];
+            const input = group.querySelector('input');
+            const icon = group.querySelector('.validation-icon');
+            const error = group.querySelector('.error-message');
+
+            if (isValid) {
+                group.classList.add('valid');
+                group.classList.remove('invalid');
+                icon.textContent = '✓';
+                error.textContent = '';
+            } else {
+                group.classList.add('invalid');
+                group.classList.remove('valid');
+                icon.textContent = '✗';
+                error.textContent = errorMsg;
+            }
+        }
+
+        nameInput.addEventListener('input', validateName);
+        emailInput.addEventListener('input', validateEmail);
+        passwordInput.addEventListener('input', validatePassword);
+        confirmInput.addEventListener('input', validateConfirm);
+
+        // ========== MODAIS ==========
+        const termsModal = document.getElementById('termsModal');
+        const privacyModal = document.getElementById('privacyModal');
+        const showTerms = document.getElementById('showTerms');
+        const showPrivacy = document.getElementById('showPrivacy');
+        const closeButtons = document.querySelectorAll('.close-modal');
+
+        showTerms.addEventListener('click', (e) => {
+            e.preventDefault();
+            termsModal.classList.add('active');
+        });
+
+        showPrivacy.addEventListener('click', (e) => {
+            e.preventDefault();
+            privacyModal.classList.add('active');
+        });
+
+        closeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                termsModal.classList.remove('active');
+                privacyModal.classList.remove('active');
+            });
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('active');
+            }
+        });
+
+        // ========== SUBMISSÃO DO FORMULÁRIO ==========
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const isNameValid = validateName();
+            const isEmailValid = validateEmail();
+            const isPasswordValid = validatePassword();
+            const isConfirmValid = validateConfirm();
+            const isTermsChecked = termsCheck.checked;
+
+            if (isNameValid && isEmailValid && isPasswordValid && isConfirmValid && isTermsChecked) {
+                // Animação de sucesso
+                const successOverlay = document.getElementById('successOverlay');
+                successOverlay.classList.add('active');
+
+                // Simular redirecionamento após 2 segundos
+                setTimeout(() => {
+                    window.location.href = 'pagina1.html';
+                }, 2000);
+            } else {
+                alert('Por favor, preencha todos os campos corretamente e aceite os termos.');
+            }
+        });
+
+        // Pequeno efeito de partículas flutuantes (simulado com CSS, mas podemos adicionar algumas dinâmicas)
+        // Já temos o background com gradientes, então não é necessário mais.
+    </script>
+</body>
+</html>
