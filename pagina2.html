@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus IA — Bem‑vindo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --gray-900: #1a1a1a;
+            --gray-700: #333333;
+            --gray-300: #808080;
+            --accent: #7ff0ff;
+            --purple: #b78aff;
+            --glow: rgba(255,255,255,0.8);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Fundo galáctico igual ao da página anterior */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle, .symbol, .floating-word {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.6;
+            animation: float 30s infinite linear;
+        }
+
+        .particle {
+            width: 6px;
+            height: 6px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--glow);
+        }
+
+        .symbol {
+            font-size: 2rem;
+            color: rgba(220,240,255,0.3);
+            text-shadow: 0 0 30px var(--accent);
+            animation: floatSymbol 35s infinite linear;
+        }
+
+        .floating-word {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: rgba(180,220,255,0.25);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            white-space: nowrap;
+            animation: floatWord 40s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(120vh) translateX(0) rotate(0deg); opacity: 0.3; }
+            100% { transform: translateY(-120vh) translateX(20vw) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes floatSymbol {
+            0% { transform: translateY(110vh) translateX(-5vw) rotate(0deg); opacity: 0.3; }
+            100% { transform: translateY(-110vh) translateX(25vw) rotate(720deg); opacity: 0; }
+        }
+
+        @keyframes floatWord {
+            0% { transform: translateY(100vh) translateX(-10vw) rotate(0deg); opacity: 0.2; }
+            100% { transform: translateY(-100vh) translateX(30vw) rotate(10deg); opacity: 0; }
+        }
+
+        /* Conteúdo principal com animações de entrada */
+        .welcome-container {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            width: 90%;
+            background: rgba(10, 10, 15, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 48px;
+            padding: 3rem 2.5rem;
+            box-shadow: 0 0 80px rgba(123, 180, 255, 0.3);
+            text-align: center;
+            animation: fadeInScale 1.2s ease forwards;
+        }
+
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #aaccff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: slideUp 0.8s ease forwards 0.3s;
+            text-shadow: 0 0 20px rgba(255,255,255,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            color: var(--gray-300);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: slideUp 0.8s ease forwards 0.6s;
+        }
+
+        .description {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin: 2.5rem 0;
+            text-align: left;
+        }
+
+        .desc-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #ddd;
+            opacity: 0;
+            animation: slideRight 0.6s ease forwards;
+            background: rgba(255,255,255,0.02);
+            padding: 0.8rem 1.5rem;
+            border-radius: 60px;
+            border: 1px solid rgba(255,255,255,0.05);
+            backdrop-filter: blur(4px);
+        }
+
+        .desc-item:nth-child(1) { animation-delay: 0.9s; }
+        .desc-item:nth-child(2) { animation-delay: 1.1s; }
+        .desc-item:nth-child(3) { animation-delay: 1.3s; }
+        .desc-item:nth-child(4) { animation-delay: 1.5s; }
+
+        @keyframes slideRight {
+            0% { opacity: 0; transform: translateX(-30px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .desc-item span {
+            font-size: 2rem;
+            filter: drop-shadow(0 0 8px var(--accent));
+        }
+
+        /* Botão brilhante */
+        .btn-shiny {
+            margin-top: 2rem;
+            padding: 1.2rem 3.5rem;
+            background: transparent;
+            border: 2px solid var(--white);
+            color: var(--white);
+            font-size: 1.6rem;
+            font-weight: 700;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeInBtn 1s ease forwards 1.8s, pulseGlow 2s infinite 2.5s;
+        }
+
+        .btn-shiny:hover {
+            background: var(--white);
+            color: var(--black);
+            transform: scale(1.05);
+            box-shadow: 0 0 50px var(--white);
+            border-color: var(--white);
+        }
+
+        @keyframes fadeInBtn {
+            to { opacity: 1; }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255,255,255,0.5); }
+            50% { box-shadow: 0 0 60px var(--accent), 0 0 100px var(--purple); }
+        }
+
+        /* Link de voltar (opcional, pequeno) */
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            color: var(--gray-300);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            opacity: 0;
+            animation: fadeInBtn 1s ease forwards 2.2s;
+        }
+
+        .back-link:hover {
+            color: var(--white);
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1.4rem; }
+            .welcome-container { padding: 2rem 1.5rem; }
+            .btn-shiny { font-size: 1.3rem; padding: 1rem 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles"></div>
+
+    <div class="welcome-container">
+        <h1>✦ NEXUS IA ✦</h1>
+        <div class="subtitle">Você está dentro.</div>
+
+        <div class="description">
+            <div class="desc-item"><span>🧠</span> IA adaptativa que aprende com seus objetivos</div>
+            <div class="desc-item"><span>🚀</span> Conexões diretas com marcas e mentores</div>
+            <div class="desc-item"><span>💎</span> Perfil inteligente com curadoria automática</div>
+            <div class="desc-item"><span>🌍</span> Networking global sem fronteiras</div>
+        </div>
+
+        <!-- Botão brilhante principal -->
+        <button class="btn-shiny" id="enterNexusBtn">ENTRAR NO NEXUS</button>
+
+        <!-- Link simbólico para voltar (opcional) -->
+        <a href="#" class="back-link" onclick="history.back(); return false;">← Voltar</a>
+    </div>
+
+    <script>
+        // ========== FUNDO GALÁCTICO (mesmo da página anterior) ==========
+        function createGalaxy() {
+            const container = document.getElementById('particles');
+            if (!container) return;
+            // Partículas
+            for (let i = 0; i < 200; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 40 + 's';
+                particle.style.width = (Math.random() * 12 + 3) + 'px';
+                particle.style.height = particle.style.width;
+                container.appendChild(particle);
+            }
+            // Símbolos
+            const symbols = ['✧', '✦', '∞', '∇', '⚡', '◈', '◎', '⬩', '💫', '🌌', '🧠', '🔮', '🌠', '✨', '🌟'];
+            for (let i = 0; i < 100; i++) {
+                const sym = document.createElement('div');
+                sym.className = 'symbol';
+                sym.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                sym.style.left = Math.random() * 100 + '%';
+                sym.style.top = Math.random() * 100 + '%';
+                sym.style.fontSize = (Math.random() * 3 + 1.5) + 'rem';
+                sym.style.animationDelay = Math.random() * 30 + 's';
+                sym.style.animationDuration = (Math.random() * 40 + 30) + 's';
+                container.appendChild(sym);
+            }
+            // Palavras flutuantes
+            const words = ['NEXUS IA', 'CONEXÃO', 'FUTURO', 'TALENTO', 'IA ÉTICA', 'REDE NEURAL', 'CRIATIVIDADE', 'OPORTUNIDADE', 'EVOLUÇÃO', 'INFINITO', 'INOVAÇÃO', 'INTELIGÊNCIA', 'ARTE', 'MÚSICA', 'DESIGN'];
+            for (let i = 0; i < 80; i++) {
+                const word = document.createElement('div');
+                word.className = 'floating-word';
+                word.textContent = words[Math.floor(Math.random() * words.length)];
+                word.style.left = Math.random() * 100 + '%';
+                word.style.top = Math.random() * 100 + '%';
+                word.style.fontSize = (Math.random() * 2 + 1.2) + 'rem';
+                word.style.animationDelay = Math.random() * 20 + 's';
+                word.style.animationDuration = (Math.random() * 50 + 30) + 's';
+                word.style.opacity = 0.25;
+                container.appendChild(word);
+            }
+        }
+        createGalaxy();
+
+        // Ação do botão brilhante (pode ser alterada para o que desejar)
+        document.getElementById('enterNexusBtn').addEventListener('click', function() {
+            // Exemplo: redirecionar para a área logada ou apenas um alerta
+            alert('Bem‑vindo ao Nexus IA! Prepare‑se para uma nova experiência.');
+            // Aqui você pode colocar um link real, ex:
+            // window.location.href = 'https://www.nexusia.com/dashboard';
+        });
+
+        // Pequeno efeito de clique no botão (opcional)
+        const btn = document.querySelector('.btn-shiny');
+        btn.addEventListener('mousedown', () => btn.style.transform = 'scale(0.98)');
+        btn.addEventListener('mouseup', () => btn.style.transform = 'scale(1)');
+        btn.addEventListener('mouseleave', () => btn.style.transform = 'scale(1)');
+    </script>
+</body>
+</html>
