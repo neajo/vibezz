@@ -37,7 +37,7 @@
             position: relative;
         }
 
-        /* Fundo galáctico igual ao da página anterior */
+        /* Fundo galáctico */
         #particles {
             position: fixed;
             top: 0;
@@ -96,7 +96,7 @@
             100% { transform: translateY(-100vh) translateX(30vw) rotate(10deg); opacity: 0; }
         }
 
-        /* Conteúdo principal com animações de entrada */
+        /* Conteúdo principal com animações */
         .welcome-container {
             position: relative;
             z-index: 10;
@@ -219,7 +219,7 @@
             50% { box-shadow: 0 0 60px var(--accent), 0 0 100px var(--purple); }
         }
 
-        /* Link de voltar (opcional, pequeno) */
+        /* Link de voltar (opcional) */
         .back-link {
             display: inline-block;
             margin-top: 2rem;
@@ -260,12 +260,12 @@
         <!-- Botão brilhante principal -->
         <button class="btn-shiny" id="enterNexusBtn">ENTRAR NO NEXUS</button>
 
-        <!-- Link simbólico para voltar (opcional) -->
+        <!-- Link simbólico para voltar (usa o histórico do navegador) -->
         <a href="#" class="back-link" onclick="history.back(); return false;">← Voltar</a>
     </div>
 
     <script>
-        // ========== FUNDO GALÁCTICO (mesmo da página anterior) ==========
+        // Fundo galáctico
         function createGalaxy() {
             const container = document.getElementById('particles');
             if (!container) return;
@@ -309,15 +309,14 @@
         }
         createGalaxy();
 
-        // Ação do botão brilhante (pode ser alterada para o que desejar)
+        // Ação do botão brilhante (pode ser personalizada)
         document.getElementById('enterNexusBtn').addEventListener('click', function() {
-            // Exemplo: redirecionar para a área logada ou apenas um alerta
             alert('Bem‑vindo ao Nexus IA! Prepare‑se para uma nova experiência.');
-            // Aqui você pode colocar um link real, ex:
-            // window.location.href = 'https://www.nexusia.com/dashboard';
+            // Se quiser redirecionar para uma página de dashboard, descomente a linha abaixo:
+            // window.location.href = 'dashboard.html';
         });
 
-        // Pequeno efeito de clique no botão (opcional)
+        // Efeito de clique no botão
         const btn = document.querySelector('.btn-shiny');
         btn.addEventListener('mousedown', () => btn.style.transform = 'scale(0.98)');
         btn.addEventListener('mouseup', () => btn.style.transform = 'scale(1)');
